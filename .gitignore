@@ -4,3 +4,4 @@ lib64
 include/
 pyvenv.cfg
 pip-selfcheck.json
+log.txt
