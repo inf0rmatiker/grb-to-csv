@@ -71,7 +71,7 @@ def find_gisjoin_indices(file_path):
                     center.distance = distance_from_center
                     min_distance = distance_from_center
 
-        print(f"[{index}/{len(gisjoin_centers)}] found center indexes for GISJOIN {center.gisjoin}:\n{center}")
+        print(f"[{index}/{len(gisjoin_centers)}] found center indexes for GISJOIN {center.gisjoin}")
         
     grbs.close()
 
@@ -126,8 +126,6 @@ def convert_grb_to_csv(file_path, out_path, year, month, day, hour, timestep):
 
             f.write(csv_row + "\n")
             
-            # print(f"  [{index+1}/{len(gisjoin_centers)} Wrote csv row: {csv_row}")
-
     grbs.close()
 
 
@@ -155,21 +153,25 @@ def count_files(prefix, year):
     return count
 
 
+def print_time(start_time):
+    print(f"Time elapsed: {time_elapsed(start_time, time.time())}")
+
+
 def time_elapsed(t1, t2):
     diff = t2 - t1
     seconds = diff
     minutes = -1
     hours = -1
 
-    retval = f"{sec} seconds"
+    retval = f"{int(seconds)} seconds"
     if seconds > 60:
         minutes = seconds // 60
         seconds = seconds % 60
-        retval = f"{minutes} minutes, {seconds} seconds"
+        retval = f"{int(minutes)} minutes, {int(seconds)} seconds"
     if minutes > 60:
         hours = minutes // 60
         minutes = minutes % 60
-        retval = f"{hours} hours, {minutes} minutes, {seconds} seconds"
+        retval = f"{int(hours)} hours, {int(minutes)} minutes, {int(seconds)} seconds"
 
     return retval
 
@@ -183,12 +185,15 @@ def main():
     data_dirs_prefix = "/s/lattice-100/a/nobackup/galileo/sustain/noaa-nam/www.ncei.noaa.gov/data/north-american-mesoscale-model/access/historical/analysis"
     out_file_prefix = "/s/lattice-100/d/nobackup/galileo/NOAA/processed_csv"
     year_str = sys.argv[1]
+    
+    start_time = time.time()
 
     init_gisjoin_centers()
     gisjoin_indices_found = False
-    start_time = time.time()
     file_count = 0
     total_files = count_files(data_dirs_prefix, year_str)
+    print(f"Total files to process: {total_files}")
+    print_time(start_time)
 
     for month in range (1, 13):
         month_str = str(month).zfill(2)
@@ -207,16 +212,15 @@ def main():
                 
                 if not gisjoin_indices_found:
                     find_gisjoin_indices(grb_file_path)
+                    print_time(start_time)
                     gisjoin_indices_found = True
 
                 convert_grb_to_csv(grb_file_path, out_file_prefix, year_str, month_str, day_str, hour_str, timestep)
                 file_count += 1
-                print(f"Finished converting file: [{file_count}/{total_files}], Time elapsed: {time_elapsed(start_time, time.time())}")
+                print(f"Finished converting file: [{file_count}/{total_files}]")
+                print_time(start_time)
                 
                 
-
-
-
 
 if __name__ == '__main__':
     main()
