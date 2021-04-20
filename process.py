@@ -182,8 +182,8 @@ def main():
        print_usage()
        exit(1)
 
-    data_dirs_prefix = "/s/lattice-100/a/nobackup/galileo/sustain/noaa-nam/www.ncei.noaa.gov/data/north-american-mesoscale-model/access/historical/analysis"
-    out_file_prefix = "/s/lattice-100/d/nobackup/galileo/NOAA/processed_csv"
+    data_dirs_prefix = "~/NOAA/original"
+    out_file_prefix = "~/NOAA/processed"
     year_str = sys.argv[1]
     
     start_time = time.time()
