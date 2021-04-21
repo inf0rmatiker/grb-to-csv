@@ -154,7 +154,7 @@ def get_files(dir_name):
 
 
 def count_files(path):
-    filenames = getFiles(path)
+    filenames = get_files(path)
     grb_filenames = [ filename for filename in filenames if filename.endswith(".grb") ]
     count = len(grb_filenames)
 
