@@ -130,25 +130,34 @@ def convert_grb_to_csv(file_path, out_path, year, month, day, hour, timestep):
 
 
 def print_usage():
-    print("\nUSAGE:\n\tpython3 process.py <year>")
-    print("\nEXAMPLE:\n\tpython3 process.py 2010\n")
+    print("\nUSAGE:\n\tpython3 process.py <year> <month> <in_prefix> <out_prefix>")
+    print("\nEXAMPLE:\n\tpython3 process.py 2010 01 ~/NOAA/original ~/NOAA/processed\n")
 
 
 def test():
     for month in range (1, 13):
         print(str(month).zfill(2))
        
-def count_files(prefix, year):
-    count = 0
-    for month in range(1, 13):
-        month_str = str(month).zfill(2)
-        year_month_dir_path = f"{prefix}/{year}{month_str}"
 
-        for day_dir in sorted(os.listdir(year_month_dir_path)):
-            day_dir_path = f"{year_month_dir_path}/{day_dir}"
-            filenames = os.listdir(day_dir_path)
-            grb_filenames = [ filename for filename in filenames if filename.endswith(".grb") ]
-            count += len(grb_filenames)
+def getFiles(dirName):
+    listOfFile = os.listdir(dirName)
+    completeFileList = list()
+    for file in listOfFile:
+        completePath = os.path.join(dirName, file)
+        if os.path.isdir(completePath):
+            completeFileList = completeFileList + getFiles(completePath)
+        else:
+            completeFileList.append(completePath)
+
+    return completeFileList
+
+
+
+def count_files(path):
+
+    filenames = getFiles(path)
+    grb_filenames = [ filename for filename in filenames if filename.endswith(".grb") ]
+    count = len(grb_filenames)
 
     return count
 
@@ -178,25 +187,26 @@ def time_elapsed(t1, t2):
 
 
 def main():
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 5:
        print_usage()
        exit(1)
 
-    data_dirs_prefix = "~/NOAA/original"
-    out_file_prefix = "~/NOAA/processed"
-    year_str = sys.argv[1]
-    
+
+    year_str            = sys.argv[1]
+    month_str           = sys.argv[2]
+    data_dirs_prefix    = sys.argv[3]
+    out_file_prefix     = sys.argv[4]
+
     start_time = time.time()
 
     init_gisjoin_centers()
     gisjoin_indices_found = False
     file_count = 0
-    total_files = count_files(data_dirs_prefix, year_str)
+    total_files = count_files(data_dirs_prefix)
     print(f"Total files to process: {total_files}")
     print_time(start_time)
 
-    for month in range (1, 13):
-        month_str = str(month).zfill(2)
+    for month_dir in sorted(os.listdir(data_dirs_prefix)):
         year_month_dir_path = f"{data_dirs_prefix}/{year_str}{month_str}"
 
         for day_dir in sorted(os.listdir(year_month_dir_path)):
