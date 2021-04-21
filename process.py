@@ -139,22 +139,21 @@ def test():
         print(str(month).zfill(2))
        
 
-def getFiles(dirName):
-    listOfFile = os.listdir(dirName)
-    completeFileList = list()
-    for file in listOfFile:
-        completePath = os.path.join(dirName, file)
-        if os.path.isdir(completePath):
-            completeFileList = completeFileList + getFiles(completePath)
+def get_files(dir_name):
+    list_of_files = os.listdir(dir_name)
+    complete_file_list = list()
+    for file in list_of_files:
+        complete_path = os.path.join(dir_name, file)
+        if os.path.isdir(complete_path):
+            complete_file_list = complete_file_list + get_files(complete_path)
         else:
-            completeFileList.append(completePath)
+            complete_file_list.append(complete_path)
 
     return completeFileList
 
 
 
 def count_files(path):
-
     filenames = getFiles(path)
     grb_filenames = [ filename for filename in filenames if filename.endswith(".grb") ]
     count = len(grb_filenames)
@@ -206,31 +205,30 @@ def main():
     print(f"Total files to process: {total_files}")
     print_time(start_time)
 
-    for month_dir in sorted(os.listdir(data_dirs_prefix)):
-        year_month_dir_path = f"{data_dirs_prefix}/{year_str}{month_str}"
+    year_month_dir_path = f"{data_dirs_prefix}/{year_str}{month_str}"
 
-        for day_dir in sorted(os.listdir(year_month_dir_path)):
-            day_str = day_dir[len(day_dir)-2:]
-            day_dir_path = f"{year_month_dir_path}/{day_dir}"
-            filenames = os.listdir(day_dir_path)
-            grb_filenames = [ filename for filename in filenames if filename.endswith(".grb") ]
+    for day_dir in sorted(os.listdir(year_month_dir_path)):
+        day_str = day_dir[len(day_dir)-2:]
+        day_dir_path = f"{year_month_dir_path}/{day_dir}"
+        filenames = os.listdir(day_dir_path)
+        grb_filenames = [ filename for filename in filenames if filename.endswith(".grb") ]
 
-            for grb_file in sorted(grb_filenames):
-                hour_str = grb_file[20:22]
-                timestep = grb_file[27:28]
-                grb_file_path = f"{day_dir_path}/{grb_file}"
-                
-                if not gisjoin_indices_found:
-                    find_gisjoin_indices(grb_file_path)
-                    print_time(start_time)
-                    gisjoin_indices_found = True
-
-                convert_grb_to_csv(grb_file_path, out_file_prefix, year_str, month_str, day_str, hour_str, timestep)
-                file_count += 1
-                print(f"Finished converting file: [{file_count}/{total_files}]")
+        for grb_file in sorted(grb_filenames):
+            hour_str = grb_file[20:22]
+            timestep = grb_file[27:28]
+            grb_file_path = f"{day_dir_path}/{grb_file}"
+            
+            if not gisjoin_indices_found:
+                find_gisjoin_indices(grb_file_path)
                 print_time(start_time)
-                
-                
+                gisjoin_indices_found = True
+
+            convert_grb_to_csv(grb_file_path, out_file_prefix, year_str, month_str, day_str, hour_str, timestep)
+            file_count += 1
+            print(f"Finished converting file: [{file_count}/{total_files}]")
+            print_time(start_time)
+            
+            
 
 if __name__ == '__main__':
     main()
