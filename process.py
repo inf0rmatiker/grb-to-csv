@@ -149,7 +149,7 @@ def get_files(dir_name):
         else:
             complete_file_list.append(complete_path)
 
-    return completeFileList
+    return complete_file_list
 
 
 
