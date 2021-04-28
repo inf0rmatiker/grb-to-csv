@@ -5,84 +5,56 @@ import sys
 import os
 import math
 
+class CSVRow:
 
-class GISJoinLatLon:
-
-    def __init__(self, center_lat, center_lon, gisjoin):
-        self.center_lat = center_lat
-        self.center_lon = center_lon
+    def __init__(self, gisjoin, timestamp_ymdh, timestep, lat, lon):
         self.gisjoin = gisjoin
-        self.lat_index = -1
-        self.lon_index = -1
-        self.lat_entry = -1
-        self.lon_entry = -1
-        self.distance  = -1
+        self.timestamp_ymdh = timestamp_ymdh
+        self.timestep = timestep
+        self.lat = lat
+        self.lon = lon
 
 
     def __repr__(self):
-        return f"GISJoin: {self.gisjoin}, Center Latitude/Longitude: ({self.center_lat}, {self.center_lon}),\nLat/Lon Indexes: [{self.lat_index}][{self.lon_index}], Lat/Lon Entries: ({self.lat_entry}, {self.lon_entry}), Distance: {self.distance}\n"
+        return f"GISJoin: {self.gisjoin}, Lat/Lon: ({self.lat_entry}, {self.lon_entry}), YMDH: {self.timestamp_ymdh}, Timestep: {self.timestep}\n"
 
 
-gisjoin_centers = []
-
-
-def init_gisjoin_centers():
-    global gisjoin_centers
+# Finds the GISJoin that a lat/lon point falls into.
+# If the point doesn't fall into any GISJoin, None is returned.
+def lat_lon_to_gisjoin(lat, lon):
 
     mongo_client = pymongo.MongoClient("mongodb://lattice-100:27018/")
     sustain_db = mongo_client["sustaindb"]
     county_geo_col = sustain_db["county_geo"]
 
-    for doc in county_geo_col.find({}, {"properties.INTPTLAT10": 1, "properties.INTPTLON10": 1, "properties.GISJOIN": 1, "_id": 0}):
-        lat = float(doc['properties']['INTPTLAT10'])
-        lon = float(doc['properties']['INTPTLON10'])
-        gisjoin = doc['properties']['GISJOIN']
+    query = { 
+        "geometry": { 
+            "$geoIntersects": { 
+                "$geometry": { 
+                    "type": "Point", 
+                    "coordinates": [ lon, lat ]
+                }
+            }
+        }
+    }
 
-        gisjoin_latlon = GISJoinLatLon(lat,lon,gisjoin)
-        gisjoin_centers.append(gisjoin_latlon)
-
-
-def euclidean_distance(lat1, lon1, lat2, lon2):
-    return math.sqrt( (lat1 - lat2)**2 + (lon1 - lon2)**2 )
-
-
-def find_gisjoin_indices(file_path):
-    grbs = pygrib.open(file_path)
-    grb  = grbs.message(1)
-    lats, lons = grb.latlons()
-    latsize = lats.shape[0]
-    lonsize = lons.shape[1]
-
-    for index, center in enumerate(gisjoin_centers):
-        min_distance = sys.maxsize # infinity
-
-        for lat_index in range(latsize):
-
-            for lon_index in range(lonsize):
-                lat = lats[lat_index][lon_index]
-                lon = lons[lat_index][lon_index]
-                distance_from_center = euclidean_distance(center.center_lat, center.center_lon, lat, lon)
-                
-                if distance_from_center < min_distance:
-                    center.lat_index = lat_index
-                    center.lon_index = lon_index
-                    center.lat_entry = lat
-                    center.lon_entry = lon
-                    center.distance = distance_from_center
-                    min_distance = distance_from_center
-
-        print(f"[{index}/{len(gisjoin_centers)}] found center indexes for GISJOIN {center.gisjoin}")
-        
-    grbs.close()
+    docs = county_geo_col.find(query)
+    try:
+        doc = next(docs)
+        gisjoin = doc["properties"]["GISJOIN"]
+        county_name = doc["properties"]["NAME10"]
+        return gisjoin, county_name
+    except Exception:
+        return None, None
 
 
-
-def convert_grb_to_csv(file_path, out_path, year, month, day, hour, timestep):
+def convert_grb_to_csv(file_path, out_path, year, month, day, hour, timestep, start_time):
     grbs = pygrib.open(file_path)
     grb = grbs.message(1)
     lats, lons = grb.latlons()
-    latsize = lats.shape[0]
-    lonsize = lons.shape[1]
+    rows, cols = (lats.shape[0], lats.shape[1])
+    year_month_day_hour = f"{year}{month}{day}{hour}"
+    out_file = f"{out_path}/{year}_{month}_{day}_{hour}_{timestep}.csv"
 
     selected_fields = [
             (2,   "Mean sea level pressure", "mean_sea_level_pressure_pascal"),
@@ -105,27 +77,38 @@ def convert_grb_to_csv(file_path, out_path, year, month, day, hour, timestep):
             (382, "Ice cover (1=ice, 0=no ice)", "ice_cover_binary")
         ]
 
-    out_file = f"{out_path}/{year}_{month}_{day}_{hour}_{timestep}.csv"
     print(f"Processing/Writing {out_file}...")
 
+
+    total_points = rows * cols
     with open(out_file, "w") as f:
         # Create csv header row with new column names
-        csv_header_row = "year_month_day_hour,timestep,gis_join"
+        csv_header_row = "year_month_day_hour,timestep,gis_join,county_name,latitude,longitude,"
         csv_header_row += ",".join([field[2] for field in selected_fields])
         f.write(csv_header_row + "\n")
+        next_target  = 10.0
 
-        year_month_day_hour = f"{year}{month}{day}{hour}"
+        for row in range(71, rows):    # there are no points within gisjoins until row 72
+            for col in range(cols):
+                lat = lats[row][col]
+                lon = lons[row][col]
+                gisjoin, county_name = lat_lon_to_gisjoin(lat, lon)
 
-        for index, center in enumerate(gisjoin_centers):
-            csv_row = f"{year_month_day_hour},{timestep},{center.gisjoin}"
+                percent_done = ( (row * col) / total_points ) * 100.0
+                if percent_done >= next_target:
+                    print("  %.2f percent done: row/col=[%d][%d], time elapsed: %s" % (percent_done, row, col, time_elapsed(start_time, time.time())))
+                    next_target += 10.0
 
-            for selected_field in selected_fields:
-                    grb = grbs.message(selected_field[0])
-                    value_for_field = grb.values[center.lat_index][center.lon_index]
-                    csv_row += f",{value_for_field}"
+                if gisjoin:
+                    csv_row = f"{year_month_day_hour},{timestep},{gisjoin},{county_name},{lat},{lon}"
+                    for selected_field in selected_fields:
+                            grb = grbs.message(selected_field[0])
+                            value_for_field = grb.values[row][col]
+                            csv_row += f",{value_for_field}"
 
-            f.write(csv_row + "\n")
-            
+                    f.write(csv_row + "\n")
+
+
     grbs.close()
 
 
@@ -135,9 +118,51 @@ def print_usage():
 
 
 def test():
-    for month in range (1, 13):
-        print(str(month).zfill(2))
-       
+    lat = 40.585258
+    lon = -105.084419
+    query = { 
+        "geometry": { 
+            "$geoIntersects": { 
+                "$geometry": { 
+                    "type": "Point", 
+                    "coordinates": [ lon, lat ]
+                }
+            }
+        }
+    }
+
+    mongo_client = pymongo.MongoClient("mongodb://lattice-100:27018/")
+    sustain_db = mongo_client["sustaindb"]
+    county_geo_col = sustain_db["county_geo"]
+
+    docs = county_geo_col.find(query)
+    gisjoin = next(docs)["properties"]["GISJOIN"]
+    print(gisjoin)
+
+
+def test_grb():
+    grbs = pygrib.open("/s/parsons/b/others/sustain/NOAA/original/201001/20100103/namanl_218_20100103_0600_000.grb")
+    grb = grbs.message(1)
+    lats, lons = grb.latlons()
+    rows, cols = (lats.shape[0], lats.shape[1])
+    print(rows, cols)
+
+    count = 0
+    for col in range(cols):
+        for row in range(rows):
+            lat = lats[row][col]
+            lon = lons[row][col]
+
+            grb = grbs.message(5)
+            value_for_field = grb.values[row][col]
+           
+            print(f"{lon}, {lat}")
+            count += 1
+            if count == 500:
+                grbs.close()
+                exit(0)
+
+
 
 def get_files(dir_name):
     list_of_files = os.listdir(dir_name)
@@ -190,7 +215,6 @@ def main():
        print_usage()
        exit(1)
 
-
     year_str            = sys.argv[1]
     month_str           = sys.argv[2]
     data_dirs_prefix    = sys.argv[3]
@@ -198,8 +222,6 @@ def main():
 
     start_time = time.time()
 
-    init_gisjoin_centers()
-    gisjoin_indices_found = False
     file_count = 0
     total_files = count_files(data_dirs_prefix)
     print(f"Total files to process: {total_files}")
@@ -218,16 +240,10 @@ def main():
             timestep = grb_file[27:28]
             grb_file_path = f"{day_dir_path}/{grb_file}"
             
-            if not gisjoin_indices_found:
-                find_gisjoin_indices(grb_file_path)
-                print_time(start_time)
-                gisjoin_indices_found = True
-
-            convert_grb_to_csv(grb_file_path, out_file_prefix, year_str, month_str, day_str, hour_str, timestep)
+            convert_grb_to_csv(grb_file_path, out_file_prefix, year_str, month_str, day_str, hour_str, timestep, start_time)
             file_count += 1
             print(f"Finished converting file: [{file_count}/{total_files}]")
             print_time(start_time)
-            
             
 
 if __name__ == '__main__':
