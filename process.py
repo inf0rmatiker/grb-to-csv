@@ -86,13 +86,16 @@ def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, sta
         create_row_col_to_gisjoin_mappings(grb_file, lat_lon_to_gisjoin_mappings_file)
 
     if not is_loaded:
+        before = time.time()
         read_row_col_to_gisjoin_mappings(lat_lon_to_gisjoin_mappings_file)
         is_loaded = True
+        after = time.time()
+        print("Took %s to load gisjoin mappings" % time_elapsed(before, after))
 
     grbs = pygrib.open(grb_file)
     grb = grbs.message(1)
     lats, lons = grb.latlons()
-    rows, cols = (lats.shape[0], lats.shape[1])
+    rows = list(row_col_to_gisjoins.keys())
     year_month_day_hour = f"{year}{month}{day}{hour}"
     out_file = f"{out_path}/{year}_{month}_{day}_{hour}_{timestep}.csv"
 
@@ -119,7 +122,6 @@ def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, sta
 
     print(f"Processing/Writing {out_file}...")
 
-    total_points = rows * cols
     with open(out_file, "w") as f:
         # Create csv header row with new column names
         csv_header_row = "year_month_day_hour,timestep,gis_join,latitude,longitude,"
@@ -127,13 +129,14 @@ def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, sta
         f.write(csv_header_row + "\n")
         next_target = 10.0
 
-        for row in list(row_col_to_gisjoins.keys()):  # Get only the row keys which fall into gisjoins
+        for index, row in enumerate(rows):  # Get only the row keys which fall into gisjoins
+            before = time.time()
             for col in list(row_col_to_gisjoins[row].keys()):  # Get only the col keys which fall into gisjoins
                 lat = lats[row][col]
                 lon = lons[row][col]
                 gisjoin = row_col_to_gisjoins[row][col]
 
-                percent_done = ((row * col) / total_points) * 100.0
+                percent_done = (index / len(rows)) * 100.0
                 if percent_done >= next_target:
                     print("  %.2f percent done: row/col=[%d][%d], time elapsed: %s" % (
                         percent_done, row, col, time_elapsed(start_time, time.time())))
@@ -147,6 +150,9 @@ def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, sta
                         csv_row += f",{value_for_field}"
 
                     f.write(csv_row + "\n")
+
+            after = time.time()
+            print("Took %s to complete row %d" % (time_elapsed(before, after), row))
 
     grbs.close()
 
