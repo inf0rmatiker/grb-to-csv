@@ -153,7 +153,7 @@ def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, sta
                     f.write(csv_row + "\n")
 
             after = time.time()
-            print("Took %s to complete row %d / %d, with %d cols" % (time_elapsed(before, after), row, len(rows),
+            print("Took %s to complete row %d / %d, with %d cols" % (time_elapsed(before, after), index, len(rows),
                                                                      len(cols)))
 
     grbs.close()
