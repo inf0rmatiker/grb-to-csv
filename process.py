@@ -81,7 +81,8 @@ def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, sta
 
     global is_loaded
 
-    if os.path.isfile(lat_lon_to_gisjoin_mappings_file):
+    print("Using cached mappings file: ", lat_lon_to_gisjoin_mappings_file)
+    if not os.path.isfile(lat_lon_to_gisjoin_mappings_file):
         create_row_col_to_gisjoin_mappings(grb_file, lat_lon_to_gisjoin_mappings_file)
 
     if not is_loaded:
@@ -231,7 +232,6 @@ def time_elapsed(t1, t2):
     diff = t2 - t1
     seconds = diff
     minutes = -1
-    hours = -1
 
     retval = f"{int(seconds)} seconds"
     if seconds > 60:
