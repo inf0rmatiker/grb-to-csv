@@ -6,3 +6,4 @@ pyvenv.cfg
 pip-selfcheck.json
 log.txt
 .idea/
+gisjoin_mappings.csv

@@ -48,7 +48,7 @@ def create_row_col_to_gisjoin_mappings(grb_file, csv_file):
     rows, cols = (lats.shape[0], lats.shape[1])
     mongo_client = pymongo.MongoClient("mongodb://lattice-100:27018/")
     with open(csv_file, "w") as f:
-        f.write("gisjoin,row,col")
+        f.write("gisjoin,row,col\n")
         for row in range(71, rows):  # there are no points within gisjoins until row 72
             for col in range(cols):
                 lat = lats[row][col]
