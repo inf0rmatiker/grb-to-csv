@@ -131,7 +131,8 @@ def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, sta
 
         for index, row in enumerate(rows):  # Get only the row keys which fall into gisjoins
             before = time.time()
-            for col in list(row_col_to_gisjoins[row].keys()):  # Get only the col keys which fall into gisjoins
+            cols = list(row_col_to_gisjoins[row].keys())
+            for col in cols:  # Get only the col keys which fall into gisjoins
                 lat = lats[row][col]
                 lon = lons[row][col]
                 gisjoin = row_col_to_gisjoins[row][col]
@@ -152,7 +153,8 @@ def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, sta
                     f.write(csv_row + "\n")
 
             after = time.time()
-            print("Took %s to complete row %d" % (time_elapsed(before, after), row))
+            print("Took %s to complete row %d / %d, with %d cols" % (time_elapsed(before, after), row, len(rows),
+                                                                     len(cols)))
 
     grbs.close()
 
