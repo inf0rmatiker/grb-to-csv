@@ -3,36 +3,26 @@ import time
 import pymongo
 import sys
 import os
-import math
+import pandas as pd
 
-class CSVRow:
-
-    def __init__(self, gisjoin, timestamp_ymdh, timestep, lat, lon):
-        self.gisjoin = gisjoin
-        self.timestamp_ymdh = timestamp_ymdh
-        self.timestep = timestep
-        self.lat = lat
-        self.lon = lon
-
-
-    def __repr__(self):
-        return f"GISJoin: {self.gisjoin}, Lat/Lon: ({self.lat_entry}, {self.lon_entry}), YMDH: {self.timestamp_ymdh}, Timestep: {self.timestep}\n"
+# 428 rows x 614 cols = 262,792 entries. Some do not fall within a gisjoin.
+# { key=row: value={ key=col: value=gisjoin } }
+row_col_to_gisjoins = {}
+is_loaded = False
 
 
 # Finds the GISJoin that a lat/lon point falls into.
 # If the point doesn't fall into any GISJoin, None is returned.
-def lat_lon_to_gisjoin(lat, lon):
-
-    mongo_client = pymongo.MongoClient("mongodb://lattice-100:27018/")
+def lat_lon_to_gisjoin(mongo_client, lat, lon):
     sustain_db = mongo_client["sustaindb"]
     county_geo_col = sustain_db["county_geo"]
 
-    query = { 
-        "geometry": { 
-            "$geoIntersects": { 
-                "$geometry": { 
-                    "type": "Point", 
-                    "coordinates": [ lon, lat ]
+    query = {
+        "geometry": {
+            "$geoIntersects": {
+                "$geometry": {
+                    "type": "Point",
+                    "coordinates": [lon, lat]
                 }
             }
         }
@@ -42,14 +32,63 @@ def lat_lon_to_gisjoin(lat, lon):
     try:
         doc = next(docs)
         gisjoin = doc["properties"]["GISJOIN"]
-        county_name = doc["properties"]["NAME10"]
-        return gisjoin, county_name
+        return gisjoin
     except Exception:
-        return None, None
+        return None
 
 
-def convert_grb_to_csv(file_path, out_path, year, month, day, hour, timestep, start_time):
-    grbs = pygrib.open(file_path)
+# Iterates over all latitude, longitude pairs in grb file,
+# looks up which gisjoin they fall into, then saves the
+# row/col->gisjoin mapping to a csv file.
+def create_row_col_to_gisjoin_mappings(grb_file, csv_file):
+    print("Converting lats/lons to gisjoins and caching results to file {csv_file}...")
+    grbs = pygrib.open(grb_file)
+    grb = grbs.message(1)
+    lats, lons = grb.latlons()
+    rows, cols = (lats.shape[0], lats.shape[1])
+    mongo_client = pymongo.MongoClient("mongodb://lattice-100:27018/")
+    with open(csv_file, "w") as f:
+        f.write("gisjoin,row,col")
+        for row in range(71, rows):  # there are no points within gisjoins until row 72
+            for col in range(cols):
+                lat = lats[row][col]
+                lon = lons[row][col]
+                gisjoin = lat_lon_to_gisjoin(mongo_client, lat, lon)
+                if gisjoin:
+                    f.write(f"{gisjoin},{row},{col}\n")
+
+    grbs.close()
+
+
+# Reads a previously-saved csv file containing row/col->gisjoin mappings
+# into the row_col_to_gisjoins mapping dictionary.
+def read_row_col_to_gisjoin_mappings(csv_file):
+    global row_col_to_gisjoins
+    data = pd.read_csv(csv_file, sep=',', header='infer')
+    for index, df_row in data.iterrows():
+        row = df_row['row']
+        col = df_row['col']
+        gisjoin = df_row['gisjoin']
+
+        if row not in row_col_to_gisjoins:
+            row_col_to_gisjoins[row] = {col: gisjoin}
+        else:
+            row_col_to_gisjoins[row][col] = gisjoin
+
+
+def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, start_time,
+                       lat_lon_to_gisjoin_mappings_file):
+
+    global is_loaded
+
+    if os.path.isfile(lat_lon_to_gisjoin_mappings_file):
+        create_row_col_to_gisjoin_mappings(grb_file, lat_lon_to_gisjoin_mappings_file)
+
+    if not is_loaded:
+        read_row_col_to_gisjoin_mappings(lat_lon_to_gisjoin_mappings_file)
+        is_loaded = True
+
+    grbs = pygrib.open(grb_file)
     grb = grbs.message(1)
     lats, lons = grb.latlons()
     rows, cols = (lats.shape[0], lats.shape[1])
@@ -57,75 +96,75 @@ def convert_grb_to_csv(file_path, out_path, year, month, day, hour, timestep, st
     out_file = f"{out_path}/{year}_{month}_{day}_{hour}_{timestep}.csv"
 
     selected_fields = [
-            (2,   "Mean sea level pressure", "mean_sea_level_pressure_pascal"),
-            (3,   "Surface pressure", "surface_pressure_surface_level_pascal"),
-            (4,   "Orography", "orography_surface_level_meters"),
-            (5,   "Temperature", "temp_surface_level_kelvin"),
-            (6,   "2 metre temperature", "2_metre_temp_kelvin"),
-            (7,   "2 metre dewpoint temperature", "2_metre_dewpoint_temp_kelvin"),
-            (8,   "Relative humidity", "relative_humidity_percent"),
-            (9,   "10 metre U wind component", "10_metre_u_wind_component_meters_per_second"),
-            (10,  "10 metre V wind component", "10_metre_v_wind_component_meters_per_second"),
-            (11,  "Total Precipitation", "total_precipitation_kg_per_squared_meter"),
-            (12,  "Convective precipitation (water)", "water_convection_precipitation_kg_per_squared_meter"),
-            (291, "Soil Temperature", "soil_temperature_kelvin"),
-            (339, "Pressure", "pressure_pascal"),
-            (347, "Visibility", "visibility_meters"),
-            (348, "Precipitable water", "precipitable_water_kg_per_squared_meter"),
-            (358, "Total Cloud Cover", "total_cloud_cover_percent"),
-            (362, "Snow depth", "snow_depth_meters"),
-            (382, "Ice cover (1=ice, 0=no ice)", "ice_cover_binary")
-        ]
+        (2, "Mean sea level pressure", "mean_sea_level_pressure_pascal"),
+        (3, "Surface pressure", "surface_pressure_surface_level_pascal"),
+        (4, "Orography", "orography_surface_level_meters"),
+        (5, "Temperature", "temp_surface_level_kelvin"),
+        (6, "2 metre temperature", "2_metre_temp_kelvin"),
+        (7, "2 metre dewpoint temperature", "2_metre_dewpoint_temp_kelvin"),
+        (8, "Relative humidity", "relative_humidity_percent"),
+        (9, "10 metre U wind component", "10_metre_u_wind_component_meters_per_second"),
+        (10, "10 metre V wind component", "10_metre_v_wind_component_meters_per_second"),
+        (11, "Total Precipitation", "total_precipitation_kg_per_squared_meter"),
+        (12, "Convective precipitation (water)", "water_convection_precipitation_kg_per_squared_meter"),
+        (291, "Soil Temperature", "soil_temperature_kelvin"),
+        (339, "Pressure", "pressure_pascal"),
+        (347, "Visibility", "visibility_meters"),
+        (348, "Precipitable water", "precipitable_water_kg_per_squared_meter"),
+        (358, "Total Cloud Cover", "total_cloud_cover_percent"),
+        (362, "Snow depth", "snow_depth_meters"),
+        (382, "Ice cover (1=ice, 0=no ice)", "ice_cover_binary")
+    ]
 
     print(f"Processing/Writing {out_file}...")
-
 
     total_points = rows * cols
     with open(out_file, "w") as f:
         # Create csv header row with new column names
-        csv_header_row = "year_month_day_hour,timestep,gis_join,county_name,latitude,longitude,"
+        csv_header_row = "year_month_day_hour,timestep,gis_join,latitude,longitude,"
         csv_header_row += ",".join([field[2] for field in selected_fields])
         f.write(csv_header_row + "\n")
-        next_target  = 10.0
+        next_target = 10.0
 
-        for row in range(71, rows):    # there are no points within gisjoins until row 72
-            for col in range(cols):
+        for row in list(row_col_to_gisjoins.keys()):  # Get only the row keys which fall into gisjoins
+            for col in list(row_col_to_gisjoins[row].keys()):  # Get only the col keys which fall into gisjoins
                 lat = lats[row][col]
                 lon = lons[row][col]
-                gisjoin, county_name = lat_lon_to_gisjoin(lat, lon)
+                gisjoin = row_col_to_gisjoins[row][col]
 
-                percent_done = ( (row * col) / total_points ) * 100.0
+                percent_done = ((row * col) / total_points) * 100.0
                 if percent_done >= next_target:
-                    print("  %.2f percent done: row/col=[%d][%d], time elapsed: %s" % (percent_done, row, col, time_elapsed(start_time, time.time())))
+                    print("  %.2f percent done: row/col=[%d][%d], time elapsed: %s" % (
+                        percent_done, row, col, time_elapsed(start_time, time.time())))
                     next_target += 10.0
 
                 if gisjoin:
-                    csv_row = f"{year_month_day_hour},{timestep},{gisjoin},{county_name},{lat},{lon}"
+                    csv_row = f"{year_month_day_hour},{timestep},{gisjoin},{lat},{lon}"
                     for selected_field in selected_fields:
-                            grb = grbs.message(selected_field[0])
-                            value_for_field = grb.values[row][col]
-                            csv_row += f",{value_for_field}"
+                        grb = grbs.message(selected_field[0])
+                        value_for_field = grb.values[row][col]
+                        csv_row += f",{value_for_field}"
 
                     f.write(csv_row + "\n")
-
 
     grbs.close()
 
 
 def print_usage():
-    print("\nUSAGE:\n\tpython3 process.py <year> <month> <in_prefix> <out_prefix>")
+    print("\nUSAGE:\n\tpython3 process.py <year> <month> <in_prefix> <out_prefix> <latlons_to_gisjoins_csv_file>")
+    print("\t  Note: if the lats/lons -> gisjoins csv mapping file does not exist yet, it will be created.")
     print("\nEXAMPLE:\n\tpython3 process.py 2010 01 ~/NOAA/original ~/NOAA/processed\n")
 
 
 def test():
     lat = 40.585258
     lon = -105.084419
-    query = { 
-        "geometry": { 
-            "$geoIntersects": { 
-                "$geometry": { 
-                    "type": "Point", 
-                    "coordinates": [ lon, lat ]
+    query = {
+        "geometry": {
+            "$geoIntersects": {
+                "$geometry": {
+                    "type": "Point",
+                    "coordinates": [lon, lat]
                 }
             }
         }
@@ -155,13 +194,12 @@ def test_grb():
 
             grb = grbs.message(5)
             value_for_field = grb.values[row][col]
-           
+
             print(f"{lon}, {lat}")
             count += 1
             if count == 500:
                 grbs.close()
                 exit(0)
-
 
 
 def get_files(dir_name):
@@ -177,10 +215,9 @@ def get_files(dir_name):
     return complete_file_list
 
 
-
 def count_files(path):
     filenames = get_files(path)
-    grb_filenames = [ filename for filename in filenames if filename.endswith(".grb") ]
+    grb_filenames = [filename for filename in filenames if filename.endswith(".grb")]
     count = len(grb_filenames)
 
     return count
@@ -209,16 +246,17 @@ def time_elapsed(t1, t2):
     return retval
 
 
-
 def main():
-    if len(sys.argv) < 5:
-       print_usage()
-       exit(1)
+    if len(sys.argv) < 6:
+        print_usage()
+        exit(1)
 
-    year_str            = sys.argv[1]
-    month_str           = sys.argv[2]
-    data_dirs_prefix    = sys.argv[3]
-    out_file_prefix     = sys.argv[4]
+    year_str = sys.argv[1]
+    month_str = sys.argv[2]
+    data_dirs_prefix = sys.argv[3]
+    out_file_prefix = sys.argv[4]
+    lat_lon_to_gisjoin_mappings_file = sys.argv[5]
+    year_month_dir_path = f"{data_dirs_prefix}/{year_str}{month_str}"
 
     start_time = time.time()
 
@@ -227,24 +265,23 @@ def main():
     print(f"Total files to process: {total_files}")
     print_time(start_time)
 
-    year_month_dir_path = f"{data_dirs_prefix}/{year_str}{month_str}"
-
     for day_dir in sorted(os.listdir(year_month_dir_path)):
-        day_str = day_dir[len(day_dir)-2:]
+        day_str = day_dir[len(day_dir) - 2:]
         day_dir_path = f"{year_month_dir_path}/{day_dir}"
         filenames = os.listdir(day_dir_path)
-        grb_filenames = [ filename for filename in filenames if filename.endswith(".grb") ]
+        grb_filenames = [filename for filename in filenames if filename.endswith(".grb")]
 
         for grb_file in sorted(grb_filenames):
             hour_str = grb_file[20:22]
             timestep = grb_file[27:28]
             grb_file_path = f"{day_dir_path}/{grb_file}"
-            
-            convert_grb_to_csv(grb_file_path, out_file_prefix, year_str, month_str, day_str, hour_str, timestep, start_time)
+
+            convert_grb_to_csv(grb_file_path, out_file_prefix, year_str, month_str, day_str, hour_str, timestep,
+                               start_time, lat_lon_to_gisjoin_mappings_file)
             file_count += 1
             print(f"Finished converting file: [{file_count}/{total_files}]")
             print_time(start_time)
-            
+
 
 if __name__ == '__main__':
     main()
