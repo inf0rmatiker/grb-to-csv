@@ -5,11 +5,17 @@ import sys
 import os
 import pandas as pd
 
-# 428 rows x 614 cols = 262,792 entries. Some do not fall within a gisjoin.
+# 428 rows x 614 cols = 262,792 entries. Some do not fall within a gisjoin
 # { key=row: value={ key=col: value=gisjoin } }
 row_col_to_gisjoins = {}
-is_loaded = False
 
+# 3192 gisjoins
+# { key=gisjoin: value=[ (row,col), (row,col), ..., ] ) }
+gisjoin_to_row_col = {}
+
+
+
+is_loaded = False
 
 # Finds the GISJoin that a lat/lon point falls into.
 # If the point doesn't fall into any GISJoin, None is returned.
@@ -40,7 +46,7 @@ def lat_lon_to_gisjoin(mongo_client, lat, lon):
 # Iterates over all latitude, longitude pairs in grb file,
 # looks up which gisjoin they fall into, then saves the
 # row/col->gisjoin mapping to a csv file.
-def create_row_col_to_gisjoin_mappings(grb_file, csv_file):
+def create_gisjoin_to_row_col_mappings(grb_file, csv_file):
     print("Converting lats/lons to gisjoins and caching results to file {csv_file}...")
     grbs = pygrib.open(grb_file)
     grb = grbs.message(1)
@@ -61,19 +67,19 @@ def create_row_col_to_gisjoin_mappings(grb_file, csv_file):
 
 
 # Reads a previously-saved csv file containing row/col->gisjoin mappings
-# into the row_col_to_gisjoins mapping dictionary.
-def read_row_col_to_gisjoin_mappings(csv_file):
-    global row_col_to_gisjoins
+# into the gisjoin_to_row_cols mapping dictionary.
+def read_gisjoin_to_row_col_mappings(csv_file):
+    global gisjoin_to_row_col
     data = pd.read_csv(csv_file, sep=',', header='infer')
     for index, df_row in data.iterrows():
         row = df_row['row']
         col = df_row['col']
         gisjoin = df_row['gisjoin']
 
-        if row not in row_col_to_gisjoins:
-            row_col_to_gisjoins[row] = {col: gisjoin}
+        if gisjoin not in gisjoin_to_row_col:
+            gisjoin_to_row_col[gisjoin] = [(row,col)]
         else:
-            row_col_to_gisjoins[row][col] = gisjoin
+            gisjoin_to_row_col[gisjoin].append((row,col))
 
 
 def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, start_time,
@@ -81,13 +87,14 @@ def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, sta
 
     global is_loaded
 
-    print("Using cached mappings file: ", lat_lon_to_gisjoin_mappings_file)
-    if not os.path.isfile(lat_lon_to_gisjoin_mappings_file):
-        create_row_col_to_gisjoin_mappings(grb_file, lat_lon_to_gisjoin_mappings_file)
-
     if not is_loaded:
+        print("Using cached mappings file: ", lat_lon_to_gisjoin_mappings_file)
+        if not os.path.isfile(lat_lon_to_gisjoin_mappings_file):
+            create_gisjoin_to_row_col_mappings(grb_file, lat_lon_to_gisjoin_mappings_file)
+
+        print("GISJoin mappings not loaded yet, loading now...")
         before = time.time()
-        read_row_col_to_gisjoin_mappings(lat_lon_to_gisjoin_mappings_file)
+        read_gisjoin_to_row_col_mappings(lat_lon_to_gisjoin_mappings_file)
         is_loaded = True
         after = time.time()
         print("Took %s to load gisjoin mappings" % time_elapsed(before, after))
@@ -95,7 +102,7 @@ def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, sta
     grbs = pygrib.open(grb_file)
     grb = grbs.message(1)
     lats, lons = grb.latlons()
-    rows = list(row_col_to_gisjoins.keys())
+
     year_month_day_hour = f"{year}{month}{day}{hour}"
     out_file = f"{out_path}/{year}_{month}_{day}_{hour}_{timestep}.csv"
 
@@ -127,34 +134,41 @@ def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, sta
         csv_header_row = "year_month_day_hour,timestep,gis_join,latitude,longitude,"
         csv_header_row += ",".join([field[2] for field in selected_fields])
         f.write(csv_header_row + "\n")
-        next_target = 10.0
 
-        for index, row in enumerate(rows):  # Get only the row keys which fall into gisjoins
-            before = time.time()
-            cols = list(row_col_to_gisjoins[row].keys())
-            for col in cols:  # Get only the col keys which fall into gisjoins
+        # Build values list
+        values_list = []
+        before = time.time()
+        for selected_field in selected_fields:
+            grb_index = selected_field[0]
+            grb = grbs.message(grb_index)
+            values_list.append(grb.values)
+
+        after = time.time()
+        print("Took %s to complete building values_list" % (time_elapsed(before, after)))
+
+        # Retrieve values and print to file in csv format
+        processed_gisjoins = 0
+        total_gisjoins = 3912
+        next_target = 10.0
+        for gisjoin, row_col_tuples in gisjoin_to_row_col.items():
+            for row_col_tuple in row_col_tuples:
+                row = row_col_tuple[0]
+                col = row_col_tuple[1]
                 lat = lats[row][col]
                 lon = lons[row][col]
-                gisjoin = row_col_to_gisjoins[row][col]
 
-                percent_done = (index / len(rows)) * 100.0
+                percent_done = (processed_gisjoins / total_gisjoins) * 100.0
                 if percent_done >= next_target:
-                    print("  %.2f percent done: row/col=[%d][%d], time elapsed: %s" % (
-                        percent_done, row, col, time_elapsed(start_time, time.time())))
+                    print("  %.2f percent done: gisjoins (%d/%d), time elapsed: %s" % (
+                        percent_done, processed_gisjoins, total_gisjoins, time_elapsed(start_time, time.time())))
                     next_target += 10.0
 
-                if gisjoin:
-                    csv_row = f"{year_month_day_hour},{timestep},{gisjoin},{lat},{lon}"
-                    for selected_field in selected_fields:
-                        grb = grbs.message(selected_field[0])
-                        value_for_field = grb.values[row][col]
-                        csv_row += f",{value_for_field}"
+                csv_row = f"{year_month_day_hour},{timestep},{gisjoin},{lat},{lon}"
+                for values in values_list:
+                    csv_row += f",{values[row][col]}"
 
-                    f.write(csv_row + "\n")
-
-            after = time.time()
-            print("Took %s to complete row %d / %d, with %d cols" % (time_elapsed(before, after), index, len(rows),
-                                                                     len(cols)))
+                f.write(csv_row + "\n")
+            processed_gisjoins += 1
 
     grbs.close()
 
