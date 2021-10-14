@@ -13,8 +13,6 @@ row_col_to_gisjoins = {}
 # { key=gisjoin: value=[ (row,col), (row,col), ..., ] ) }
 gisjoin_to_row_col = {}
 
-
-
 is_loaded = False
 
 # Finds the GISJoin that a lat/lon point falls into.
