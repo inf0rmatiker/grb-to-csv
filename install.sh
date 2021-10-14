@@ -7,4 +7,4 @@ echo -e "\t./bin/pip3 install pymongo cython pygrib;\n"
 
 python3 -m venv . && chmod +x ./bin/activate && ./bin/activate;
 ./bin/pip3 install --upgrade pip;
-./bin/pip3 install pymongo cython pygrib;
+./bin/pip3 install pymongo cython pandas pygrib;
