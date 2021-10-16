@@ -12,4 +12,12 @@ Run `./install.sh`, which creates a virtual environment and installs the `pymong
 
 ## Usage
 
-With the data downloaded to `<data_dir>`, run `./run.sh <path_to_data_dir>`
+Convert .grb to .csv:
+
+- With the data downloaded to `<data_dir>`, execute `./bin/python3 process.py <year> <month> <in_prefix> <out_prefix> <latlons_to_gisjoins_csv_file>`
+  - Example: `./bin/python3 process.py 2010 07 ~/NOAA/original ~/NOAA/processed gisjoin_mappings.csv`
+
+Import to MongoDB:
+
+- Run `./import.sh <path_to_processed>`
+  - Example: `./import.sh ../processed` 
