@@ -171,52 +171,6 @@ def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, sta
     grbs.close()
 
 
-def test():
-    lat = 40.585258
-    lon = -105.084419
-    query = {
-        "geometry": {
-            "$geoIntersects": {
-                "$geometry": {
-                    "type": "Point",
-                    "coordinates": [lon, lat]
-                }
-            }
-        }
-    }
-
-    mongo_client = pymongo.MongoClient("mongodb://lattice-100:27018/")
-    sustain_db = mongo_client["sustaindb"]
-    county_geo_col = sustain_db["county_geo"]
-
-    docs = county_geo_col.find(query)
-    gisjoin = next(docs)["properties"]["GISJOIN"]
-    print(gisjoin)
-
-
-def test_grb():
-    grbs = pygrib.open("/s/parsons/b/others/sustain/NOAA/original/201001/20100103/namanl_218_20100103_0600_000.grb")
-    grb = grbs.message(1)
-    lats, lons = grb.latlons()
-    rows, cols = (lats.shape[0], lats.shape[1])
-    print(rows, cols)
-
-    count = 0
-    for col in range(cols):
-        for row in range(rows):
-            lat = lats[row][col]
-            lon = lons[row][col]
-
-            grb = grbs.message(5)
-            value_for_field = grb.values[row][col]
-
-            print(f"{lon}, {lat}")
-            count += 1
-            if count == 500:
-                grbs.close()
-                exit(0)
-
-
 def get_files(dir_name):
     list_of_files = os.listdir(dir_name)
     complete_file_list = list()
@@ -284,18 +238,24 @@ def main():
     grb_filenames = [filename for filename in filenames if filename.endswith(".grb")]
     for grb_file in grb_filenames:
        
-        print(grb_file)
-        '''
-        hour_str = grb_file[20:22]
-        timestep = grb_file[27:28]
-        grb_file_path = f"{day_dir_path}/{grb_file}"
+        # Filename looks like: "namanl_218_20101129_0600_006.grb"
+        grb_file_fields = grb_file.split('_')
+        yyyymmdd = grb_file_fields[2]
+        hour = grb_file_fields[3]
+        timestep = grb_file_fields[4][:-4]
+        yyyy = yyyymmdd[:4]
+        mm = yyyymmdd[4:6]
+        dd = yyyymmdd[6:]
 
-        convert_grb_to_csv(grb_file_path, out_file_prefix, year_str, month_str, day_str, hour_str, timestep,
+        input_file_path = f"{input_path}{grb_file}" if input_path.endswith("/") else f"{input_path}/{grb_file}"
+        output_path = output_path if not output_path.endswith("/") else output_path[:-1] # remove trailing slash
+
+        convert_grb_to_csv(input_file_path, output_path, yyyy, mm, dd, hour, timestep,
                            start_time, lat_lon_to_gisjoin_mappings_file)
         file_count += 1
         print(f"Finished converting file: [{file_count}/{total_files}]")
         print_time(start_time)
-        '''
+
 
 if __name__ == '__main__':
     main()
