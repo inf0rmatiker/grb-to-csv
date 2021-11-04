@@ -5,51 +5,15 @@ import sys
 import os
 import pandas as pd
 
-# 428 rows x 614 cols = 262,792 entries. Some do not fall within a gisjoin
-# { key=row: value={ key=col: value=gisjoin } }
-row_col_to_gisjoins = {}
+# 428 rows x 614 cols = 262,792 entries. Some do not fall within a gis_join
+# { key=row: value={ key=col: value=gis_join } }
+row_col_to_gis_joins = {}
 
-# 3192 gisjoins
-# { key=gisjoin: value=[ (row,col), (row,col), ..., ] ) }
-gisjoin_to_row_col = {}
+# 3192 gis_joins
+# { key=gis_join: value=[ (row,col), (row,col), ..., ] ) }
+gis_join_to_row_col = {}
 
-is_loaded = False
-
-# Fields we want from the .grb2 files:
-# (<grb_row_index>, <assigned_field_name>)
-selected_grb_2_fields = {
-    (1,   "PRESSURE_REDUCED_TO_MSL_PASCAL"),
-    (4,   "VISIBILITY_AT_SURFACE_METERS"),
-    (5,   "VISIBILITY_AT_CLOUD_TOP_METERS"),
-    (8,   "U_COMPONENT_OF_WIND_AT_PLANETARY_BOUNDARY_LAYER_METERS_PER_SEC"),
-    (9,   "V_COMPONENT_OF_WIND_AT_PLANETARY_BOUNDARY_LAYER_METERS_PER_SEC"),
-    (11,  "WIND_GUST_SPEED_AT_SURFACE_METERS_PER_SEC"),
-    (337, "PRESSURE_AT_SURFACE_PASCAL"),
-    (339, "TEMPERATURE_AT_SURFACE_KELVIN"),
-    (340, "SOIL_TEMPERATURE_0_TO_0.1_M_BELOW_SURFACE_KELVIN"),
-    (341, "VOLUMETRIC_SOIL_MOISTURE_CONTENT_0_TO_0.1_M_BELOW_SURFACE_FRACTION"),
-    (357, "SNOW_COVER_AT_SURFACE_PERCENT"),
-    (358, "SNOW_DEPTH_AT_SURFACE_METERS"),
-    (361, "TEMPERATURE_2_METERS_ABOVE_SURFACE_KELVIN"),
-    (363, "DEWPOINT_TEMPERATURE_2_METERS_ABOVE_SURFACE_KELVIN"),
-    (364, "RELATIVE_HUMIDITY_2_METERS_ABOVE_SURFACE_PERCENT"),
-    (365, "U_COMPONENT_OF_WIND_2_METERS_ABOVE_SURFACE_METERS_PER_SEC"),
-    (365, "V_COMPONENT_OF_WIND_2_METERS_ABOVE_SURFACE_METERS_PER_SEC"),
-    (367, "TOTAL_PRECIPITATION_SURFACE_ACCUM_KG_PER_SQ_METER"),
-    (368, "CONVECTIVE_PRECIPITATION_SURFACE_ACCUM_KG_PER_SQ_METER"),
-    (370, "GEOPOTENTIAL_HEIGHT_LOWEST_LEVEL_WET_BULB_ZERO_GPM"),
-    (371, "CATEGORICAL_SNOW_SURFACE_BINARY"),
-    (372, "CATEGORICAL_ICE_PELLETS_SURFACE_BINARY"),
-    (373, "CATEGORICAL_FREEZING_RAIN_SURFACE_BINARY"),
-    (374, "CATEGORICAL_RAIN_SURFACE_BINARY"),
-    (378, "VEGETATION_SURFACE_PERCENT"),
-    (379, "VEGETATION_TYPE_SIB_INT"),
-    (380, "SOIL_TYPE_ZOBLER_INT"),
-    (392, "PRESSURE_TROPOPAUSE_PASCAL"),
-    (393, "TEMPERATURE_TROPOPAUSE_KELVIN"),
-    (394, "U_COMPONENT_OF_WIND_TROPOPAUSE_METERS_PER_SEC"),
-    (395, "U_COMPONENT_OF_WIND_TROPOPAUSE_METERS_PER_SEC")
-}
+is_gis_join_mappings_loaded = False
 
 
 def load_selected_fields():
@@ -59,7 +23,7 @@ def load_selected_fields():
 
 # Finds the GISJoin that a lat/lon point falls into.
 # If the point doesn't fall into any GISJoin, None is returned.
-def lat_lon_to_gisjoin(mongo_client, lat, lon):
+def lat_lon_to_gis_join(mongo_client, lat, lon):
     sustain_db = mongo_client["sustaindb"]
     county_geo_col = sustain_db["county_geo"]
 
@@ -77,66 +41,66 @@ def lat_lon_to_gisjoin(mongo_client, lat, lon):
     docs = county_geo_col.find(query)
     try:
         doc = next(docs)
-        gisjoin = doc["properties"]["GISJOIN"]
-        return gisjoin
+        gis_join = doc["properties"]["GISJOIN"]
+        return gis_join
     except Exception:
         return None
 
 
 # Iterates over all latitude, longitude pairs in grb file,
-# looks up which gisjoin they fall into, then saves the
-# row/col->gisjoin mapping to a csv file.
-def create_gisjoin_to_row_col_mappings(grb_file, csv_file):
-    print("Converting lats/lons to gisjoins and caching results to file {csv_file}...")
+# looks up which gis_join they fall into, then saves the
+# row/col->gis_join mapping to a csv file.
+def create_gis_join_to_row_col_mappings(grb_file, csv_file):
+    print("Converting lats/lons to gis_joins and caching results to file {csv_file}...")
     grbs = pygrib.open(grb_file)
     grb = grbs.message(1)
     lats, lons = grb.latlons()
     rows, cols = (lats.shape[0], lats.shape[1])
     mongo_client = pymongo.MongoClient("mongodb://lattice-100:27018/")
     with open(csv_file, "w") as f:
-        f.write("gisjoin,row,col\n")
-        for row in range(71, rows):  # there are no points within gisjoins until row 72
+        f.write("gis_join,row,col\n")
+        for row in range(71, rows):  # there are no points within gis_joins until row 72
             for col in range(cols):
                 lat = lats[row][col]
                 lon = lons[row][col]
-                gisjoin = lat_lon_to_gisjoin(mongo_client, lat, lon)
-                if gisjoin:
-                    f.write(f"{gisjoin},{row},{col}\n")
+                gis_join = lat_lon_to_gis_join(mongo_client, lat, lon)
+                if gis_join:
+                    f.write(f"{gis_join},{row},{col}\n")
 
     grbs.close()
 
 
-# Reads a previously-saved csv file containing row/col->gisjoin mappings
-# into the gisjoin_to_row_cols mapping dictionary.
-def read_gisjoin_to_row_col_mappings(csv_file):
-    global gisjoin_to_row_col
+# Reads a previously-saved csv file containing row/col->gis_join mappings
+# into the gis_join_to_row_cols mapping dictionary.
+def read_gis_join_to_row_col_mappings(csv_file):
+    global gis_join_to_row_col
     data = pd.read_csv(csv_file, sep=',', header='infer')
     for index, df_row in data.iterrows():
         row = df_row['row']
         col = df_row['col']
-        gisjoin = df_row['gisjoin']
+        gis_join = df_row['gis_join']
 
-        if gisjoin not in gisjoin_to_row_col:
-            gisjoin_to_row_col[gisjoin] = [(row, col)]
+        if gis_join not in gis_join_to_row_col:
+            gis_join_to_row_col[gis_join] = [(row, col)]
         else:
-            gisjoin_to_row_col[gisjoin].append((row, col))
+            gis_join_to_row_col[gis_join].append((row, col))
 
 
 def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, start_time,
-                       lat_lon_to_gisjoin_mappings_file):
-    global is_loaded
+                       lat_lon_to_gis_join_mappings_file):
 
-    if not is_loaded:
-        print("Using cached mappings file: ", lat_lon_to_gisjoin_mappings_file)
-        if not os.path.isfile(lat_lon_to_gisjoin_mappings_file):
-            create_gisjoin_to_row_col_mappings(grb_file, lat_lon_to_gisjoin_mappings_file)
+    global is_gis_join_mappings_loaded
+    if not is_gis_join_mappings_loaded:
+        print("Using cached mappings file: ", lat_lon_to_gis_join_mappings_file)
+        if not os.path.isfile(lat_lon_to_gis_join_mappings_file):
+            create_gis_join_to_row_col_mappings(grb_file, lat_lon_to_gis_join_mappings_file)
 
         print("GISJoin mappings not loaded yet, loading now...")
         before = time.time()
-        read_gisjoin_to_row_col_mappings(lat_lon_to_gisjoin_mappings_file)
-        is_loaded = True
+        read_gis_join_to_row_col_mappings(lat_lon_to_gis_join_mappings_file)
+        is_gis_join_mappings_loaded = True
         after = time.time()
-        print("Took %s to load gisjoin mappings" % time_elapsed(before, after))
+        print("Took %s to load gis_join mappings" % time_elapsed(before, after))
 
     grbs = pygrib.open(grb_file)
 
@@ -152,14 +116,14 @@ def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, sta
     with open(out_file, "w") as f:
         # Create csv header row with new column names
         csv_header_row = "YYYYMMDDHH,TIMESTEP,GISJOIN,LATITUDE,LONGITUDE,"
-        csv_header_row += ",".join([field[2] for field in selected_fields])
+        csv_header_row += ",".join([row['field_name'] for index, row in selected_fields.iterrows()])
         f.write(csv_header_row + "\n")
 
         # Build values list
         values_list = []
         before = time.time()
-        for selected_field in selected_fields:
-            grb_index = selected_field[0]
+        for index, row in selected_fields.iterrows():
+            grb_index = row['grb_row_index']
             grb = grbs.message(grb_index)
             values_list.append(grb.values)
 
@@ -167,28 +131,28 @@ def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, sta
         print("Took %s to complete building values_list" % (time_elapsed(before, after)))
 
         # Retrieve values and print to file in csv format
-        processed_gisjoins = 0
-        total_gisjoins = 3912
+        processed_gis_joins = 0
+        total_gis_joins = 3912
         next_target = 10.0
-        for gisjoin, row_col_tuples in gisjoin_to_row_col.items():
+        for gis_join, row_col_tuples in gis_join_to_row_col.items():
             for row_col_tuple in row_col_tuples:
                 row = row_col_tuple[0]
                 col = row_col_tuple[1]
                 lat = lats[row][col]
                 lon = lons[row][col]
 
-                percent_done = (processed_gisjoins / total_gisjoins) * 100.0
+                percent_done = (processed_gis_joins / total_gis_joins) * 100.0
                 if percent_done >= next_target:
-                    print("  %.2f percent done: gisjoins (%d/%d), time elapsed: %s" % (
-                        percent_done, processed_gisjoins, total_gisjoins, time_elapsed(start_time, time.time())))
+                    print("  %.2f percent done: gis_joins (%d/%d), time elapsed: %s" % (
+                        percent_done, processed_gis_joins, total_gis_joins, time_elapsed(start_time, time.time())))
                     next_target += 10.0
 
-                csv_row = f"{year_month_day_hour},{timestep},{gisjoin},{lat},{lon}"
+                csv_row = f"{year_month_day_hour},{timestep},{gis_join},{lat},{lon}"
                 for values in values_list:
                     csv_row += f",{values[row][col]}"
 
                 f.write(csv_row + "\n")
-            processed_gisjoins += 1
+            processed_gis_joins += 1
 
     grbs.close()
 
@@ -236,25 +200,18 @@ def time_elapsed(t1, t2):
 
 def print_usage():
     print("\nUSAGE\n\t./bin/python3 process.py <input_dir> <output_dir>")
-    print("\tNote: if the lats/lons -> gisjoins csv mapping file does not exist yet, it will be created.")
-    print("\tExample:\t./bin/python3 process.py ~/NOAA/original ~/NOAA/processed\n")
-
-
-def test():
-    selected_fields = load_selected_fields()
-    csv_header_row = "YYYYMMDDHH,TIMESTEP,GISJOIN,LATITUDE,LONGITUDE,"
-    csv_header_row += ",".join([row['field_name'] for index, row in selected_fields.iterrows()])
-    print(csv_header_row)
+    print("\tNote: if the lats/lons -> gis_joins csv mapping file does not exist yet, it will be created.")
+    print("\tExample:\t./bin/python3 process.py ~/local-disk/b/nobackup/galileo/datasets/noaa_nam/original "
+          "~/local-disk/b/nobackup/galileo/datasets/noaa_nam/processed\n")
 
 
 def main():
-    test()
-    '''
+
     if len(sys.argv) != 3:
         print_usage()
         exit(1)
 
-    lat_lon_to_gisjoin_mappings_file = "./gisjoin_mappings.csv"
+    lat_lon_to_gis_join_mappings_file = "gis_join_mappings.csv"
     input_path = sys.argv[1]
     output_path = sys.argv[2]
 
@@ -268,6 +225,7 @@ def main():
     filenames = sorted(os.listdir(input_path))
     grb_filenames = [filename for filename in filenames if filename.endswith(".grb")]
     for grb_file in grb_filenames:
+
         # Filename looks like: "namanl_218_20101129_0600_006.grb"
         grb_file_fields = grb_file.split('_')
         yyyymmdd = grb_file_fields[2]
@@ -277,16 +235,16 @@ def main():
         mm = yyyymmdd[4:6]
         dd = yyyymmdd[6:]
 
+        # Fix input/output paths' slashes for consistency
         input_file_path = f"{input_path}{grb_file}" if input_path.endswith("/") else f"{input_path}/{grb_file}"
         output_path = output_path if not output_path.endswith("/") else output_path[:-1]  # remove trailing slash
 
+        # Convert grb file to csv
         convert_grb_to_csv(input_file_path, output_path, yyyy, mm, dd, hour, timestep,
-                           start_time, lat_lon_to_gisjoin_mappings_file)
+                           start_time, lat_lon_to_gis_join_mappings_file)
         file_count += 1
         print(f"Finished converting file: [{file_count}/{total_files}]")
         print_time(start_time)
-
-    '''
 
 
 if __name__ == '__main__':
