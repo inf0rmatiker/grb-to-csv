@@ -1,10 +1,10 @@
 # grb-to-csv
 
-Uses pygrib to process [NOAA NAM](https://www.ncei.noaa.gov/products/weather-climate-models/north-american-mesoscale) gridded binary (GRIB, .grb) data to CSV format for ingesting into MongoDB.
+Uses pygrib to process [NOAA NAM](https://www.ncei.noaa.gov/products/weather-climate-models/north-american-mesoscale) gridded binary (GRIB, .grb, GRIB2, .grb2) data to CSV format for ingesting into MongoDB.
 
 ## Data
 
-Download and unzip the [gridded binary datasets](https://www.ncei.noaa.gov/data/north-american-mesoscale-model/access/historical/analysis/) from NOAA NAM to a chosen directory, `<data_dir>`.
+Download and unzip the [gridded binary datasets](https://www.ncei.noaa.gov/data/north-american-mesoscale-model/access/) from NOAA NAM to a chosen directory, `<data_dir>`.
 
 ## Installation
 
@@ -12,12 +12,11 @@ Run `./install.sh`, which creates a virtual environment and installs the `pymong
 
 ## Usage
 
-Convert .grb to .csv:
+Inspect the files and select the fields you want included.
+Determine the GRIB row indices for these fields, and choose a field name for that row, putting the tuple in `selected_fields.csv`.
+See the existing file for examples.
 
-- With the data downloaded to `<data_dir>`, execute `./bin/python3 process.py <year> <month> <in_prefix> <out_prefix> <latlons_to_gisjoins_csv_file>`
-  - Example: `./bin/python3 process.py 2010 07 ~/NOAA/original ~/NOAA/processed gisjoin_mappings.csv`
+Convert .grb/.grb2 to .csv:
 
-Import to MongoDB:
-
-- Run `./import.sh <path_to_processed>`
-  - Example: `./import.sh ../processed` 
+- With the data downloaded to `<grb_input_dir>`, execute `./run.sh <grb_input_dir> <csv_output_dir>`
+  - Example: `./run.sh ~/local-disk/b/nobackup/galileo/datasets/noaa_nam/original ~/local-disk/b/nobackup/galileo/datasets/noaa_nam/processed`
