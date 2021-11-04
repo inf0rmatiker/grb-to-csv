@@ -102,6 +102,7 @@ def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, sta
         print("Took %s to load gisjoin mappings" % time_elapsed(before, after))
 
     grbs = pygrib.open(grb_file)
+
     grb = grbs.message(1)
     lats, lons = grb.latlons()
 
@@ -222,7 +223,18 @@ def print_usage():
     print("\tExample:\t./bin/python3 process.py ~/NOAA/original ~/NOAA/processed\n")
 
 
+def test():
+    grb_2_filename = "/s/lattice-120/b/nobackup/galileo/datasets/noaa_nam/nam_218_20210101_0000_000.grb2"
+    grbs = pygrib.open(grb_2_filename)
+    for grb in grbs:
+        print(grb)
+
+    grbs.close()
+
+
 def main():
+    test()
+    '''
     if len(sys.argv) != 3:
         print_usage()
         exit(1)
@@ -258,6 +270,8 @@ def main():
         file_count += 1
         print(f"Finished converting file: [{file_count}/{total_files}]")
         print_time(start_time)
+
+    '''
 
 
 if __name__ == '__main__':
