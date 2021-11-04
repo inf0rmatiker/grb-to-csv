@@ -1,0 +1,446 @@
+1:Pressure reduced to MSL:Pa (instant):lambert:meanSea:level 0:fcst time 0 hrs:from 202101010000
+2:Derived radar reflectivity:dB (instant):lambert:hybrid:level 1:fcst time 0 hrs:from 202101010000
+3:Maximum/Composite radar reflectivity:dB (instant):lambert:atmosphereSingleLayer:level 0 considered as a single layer:fcst time 0 hrs:from 202101010000
+4:Visibility:m (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+5:Visibility:m (instant):lambert:cloudTop:level 0:fcst time 0 hrs:from 202101010000
+6:Blackadar mixing length scale:m (instant):lambert:hybrid:level 1:fcst time 0 hrs:from 202101010000
+7:Geopotential Height:gpm (instant):lambert:planetaryBoundaryLayer:level 0:fcst time 0 hrs:from 202101010000
+8:U component of wind:m s**-1 (instant):lambert:planetaryBoundaryLayer:level 0:fcst time 0 hrs:from 202101010000
+9:V component of wind:m s**-1 (instant):lambert:planetaryBoundaryLayer:level 0:fcst time 0 hrs:from 202101010000
+10:Ventilation Rate:m**2 s**-1 (instant):lambert:planetaryBoundaryLayer:level 0:fcst time 0 hrs:from 202101010000
+11:Wind speed (gust):m s**-1 (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+12:197:197 (instant):lambert:atmosphereSingleLayer:level 0 considered as a single layer:fcst time 0 hrs:from 202101010000
+13:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 500 Pa:fcst time 0 hrs:from 202101010000
+14:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 1000 Pa:fcst time 0 hrs:from 202101010000
+15:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 2000 Pa:fcst time 0 hrs:from 202101010000
+16:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 5000 Pa:fcst time 0 hrs:from 202101010000
+17:Temperature:K (instant):lambert:isobaricInhPa:level 5000 Pa:fcst time 0 hrs:from 202101010000
+18:Relative humidity:% (instant):lambert:isobaricInhPa:level 5000 Pa:fcst time 0 hrs:from 202101010000
+19:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 5000 Pa:fcst time 0 hrs:from 202101010000
+20:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 5000 Pa:fcst time 0 hrs:from 202101010000
+21:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 5000 Pa:fcst time 0 hrs:from 202101010000
+22:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 5000 Pa:fcst time 0 hrs:from 202101010000
+23:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 5000 Pa:fcst time 0 hrs:from 202101010000
+24:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 7500 Pa:fcst time 0 hrs:from 202101010000
+25:Temperature:K (instant):lambert:isobaricInhPa:level 7500 Pa:fcst time 0 hrs:from 202101010000
+26:Relative humidity:% (instant):lambert:isobaricInhPa:level 7500 Pa:fcst time 0 hrs:from 202101010000
+27:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 7500 Pa:fcst time 0 hrs:from 202101010000
+28:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 7500 Pa:fcst time 0 hrs:from 202101010000
+29:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 7500 Pa:fcst time 0 hrs:from 202101010000
+30:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 7500 Pa:fcst time 0 hrs:from 202101010000
+31:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 7500 Pa:fcst time 0 hrs:from 202101010000
+32:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 10000 Pa:fcst time 0 hrs:from 202101010000
+33:Temperature:K (instant):lambert:isobaricInhPa:level 10000 Pa:fcst time 0 hrs:from 202101010000
+34:Relative humidity:% (instant):lambert:isobaricInhPa:level 10000 Pa:fcst time 0 hrs:from 202101010000
+35:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 10000 Pa:fcst time 0 hrs:from 202101010000
+36:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 10000 Pa:fcst time 0 hrs:from 202101010000
+37:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 10000 Pa:fcst time 0 hrs:from 202101010000
+38:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 10000 Pa:fcst time 0 hrs:from 202101010000
+39:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 10000 Pa:fcst time 0 hrs:from 202101010000
+40:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 12500 Pa:fcst time 0 hrs:from 202101010000
+41:Temperature:K (instant):lambert:isobaricInhPa:level 12500 Pa:fcst time 0 hrs:from 202101010000
+42:Relative humidity:% (instant):lambert:isobaricInhPa:level 12500 Pa:fcst time 0 hrs:from 202101010000
+43:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 12500 Pa:fcst time 0 hrs:from 202101010000
+44:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 12500 Pa:fcst time 0 hrs:from 202101010000
+45:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 12500 Pa:fcst time 0 hrs:from 202101010000
+46:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 12500 Pa:fcst time 0 hrs:from 202101010000
+47:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 12500 Pa:fcst time 0 hrs:from 202101010000
+48:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 15000 Pa:fcst time 0 hrs:from 202101010000
+49:Temperature:K (instant):lambert:isobaricInhPa:level 15000 Pa:fcst time 0 hrs:from 202101010000
+50:Relative humidity:% (instant):lambert:isobaricInhPa:level 15000 Pa:fcst time 0 hrs:from 202101010000
+51:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 15000 Pa:fcst time 0 hrs:from 202101010000
+52:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 15000 Pa:fcst time 0 hrs:from 202101010000
+53:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 15000 Pa:fcst time 0 hrs:from 202101010000
+54:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 15000 Pa:fcst time 0 hrs:from 202101010000
+55:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 15000 Pa:fcst time 0 hrs:from 202101010000
+56:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 17500 Pa:fcst time 0 hrs:from 202101010000
+57:Temperature:K (instant):lambert:isobaricInhPa:level 17500 Pa:fcst time 0 hrs:from 202101010000
+58:Relative humidity:% (instant):lambert:isobaricInhPa:level 17500 Pa:fcst time 0 hrs:from 202101010000
+59:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 17500 Pa:fcst time 0 hrs:from 202101010000
+60:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 17500 Pa:fcst time 0 hrs:from 202101010000
+61:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 17500 Pa:fcst time 0 hrs:from 202101010000
+62:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 17500 Pa:fcst time 0 hrs:from 202101010000
+63:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 17500 Pa:fcst time 0 hrs:from 202101010000
+64:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 20000 Pa:fcst time 0 hrs:from 202101010000
+65:Temperature:K (instant):lambert:isobaricInhPa:level 20000 Pa:fcst time 0 hrs:from 202101010000
+66:Relative humidity:% (instant):lambert:isobaricInhPa:level 20000 Pa:fcst time 0 hrs:from 202101010000
+67:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 20000 Pa:fcst time 0 hrs:from 202101010000
+68:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 20000 Pa:fcst time 0 hrs:from 202101010000
+69:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 20000 Pa:fcst time 0 hrs:from 202101010000
+70:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 20000 Pa:fcst time 0 hrs:from 202101010000
+71:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 20000 Pa:fcst time 0 hrs:from 202101010000
+72:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 22500 Pa:fcst time 0 hrs:from 202101010000
+73:Temperature:K (instant):lambert:isobaricInhPa:level 22500 Pa:fcst time 0 hrs:from 202101010000
+74:Relative humidity:% (instant):lambert:isobaricInhPa:level 22500 Pa:fcst time 0 hrs:from 202101010000
+75:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 22500 Pa:fcst time 0 hrs:from 202101010000
+76:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 22500 Pa:fcst time 0 hrs:from 202101010000
+77:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 22500 Pa:fcst time 0 hrs:from 202101010000
+78:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 22500 Pa:fcst time 0 hrs:from 202101010000
+79:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 22500 Pa:fcst time 0 hrs:from 202101010000
+80:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 25000 Pa:fcst time 0 hrs:from 202101010000
+81:Temperature:K (instant):lambert:isobaricInhPa:level 25000 Pa:fcst time 0 hrs:from 202101010000
+82:Relative humidity:% (instant):lambert:isobaricInhPa:level 25000 Pa:fcst time 0 hrs:from 202101010000
+83:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 25000 Pa:fcst time 0 hrs:from 202101010000
+84:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 25000 Pa:fcst time 0 hrs:from 202101010000
+85:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 25000 Pa:fcst time 0 hrs:from 202101010000
+86:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 25000 Pa:fcst time 0 hrs:from 202101010000
+87:Absolute vorticity:s**-1 (instant):lambert:isobaricInhPa:level 25000 Pa:fcst time 0 hrs:from 202101010000
+88:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 25000 Pa:fcst time 0 hrs:from 202101010000
+89:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 27500 Pa:fcst time 0 hrs:from 202101010000
+90:Temperature:K (instant):lambert:isobaricInhPa:level 27500 Pa:fcst time 0 hrs:from 202101010000
+91:Relative humidity:% (instant):lambert:isobaricInhPa:level 27500 Pa:fcst time 0 hrs:from 202101010000
+92:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 27500 Pa:fcst time 0 hrs:from 202101010000
+93:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 27500 Pa:fcst time 0 hrs:from 202101010000
+94:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 27500 Pa:fcst time 0 hrs:from 202101010000
+95:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 27500 Pa:fcst time 0 hrs:from 202101010000
+96:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 27500 Pa:fcst time 0 hrs:from 202101010000
+97:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 30000 Pa:fcst time 0 hrs:from 202101010000
+98:Temperature:K (instant):lambert:isobaricInhPa:level 30000 Pa:fcst time 0 hrs:from 202101010000
+99:Relative humidity:% (instant):lambert:isobaricInhPa:level 30000 Pa:fcst time 0 hrs:from 202101010000
+100:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 30000 Pa:fcst time 0 hrs:from 202101010000
+101:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 30000 Pa:fcst time 0 hrs:from 202101010000
+102:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 30000 Pa:fcst time 0 hrs:from 202101010000
+103:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 30000 Pa:fcst time 0 hrs:from 202101010000
+104:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 30000 Pa:fcst time 0 hrs:from 202101010000
+105:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 32500 Pa:fcst time 0 hrs:from 202101010000
+106:Temperature:K (instant):lambert:isobaricInhPa:level 32500 Pa:fcst time 0 hrs:from 202101010000
+107:Relative humidity:% (instant):lambert:isobaricInhPa:level 32500 Pa:fcst time 0 hrs:from 202101010000
+108:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 32500 Pa:fcst time 0 hrs:from 202101010000
+109:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 32500 Pa:fcst time 0 hrs:from 202101010000
+110:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 32500 Pa:fcst time 0 hrs:from 202101010000
+111:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 32500 Pa:fcst time 0 hrs:from 202101010000
+112:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 32500 Pa:fcst time 0 hrs:from 202101010000
+113:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 35000 Pa:fcst time 0 hrs:from 202101010000
+114:Temperature:K (instant):lambert:isobaricInhPa:level 35000 Pa:fcst time 0 hrs:from 202101010000
+115:Relative humidity:% (instant):lambert:isobaricInhPa:level 35000 Pa:fcst time 0 hrs:from 202101010000
+116:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 35000 Pa:fcst time 0 hrs:from 202101010000
+117:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 35000 Pa:fcst time 0 hrs:from 202101010000
+118:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 35000 Pa:fcst time 0 hrs:from 202101010000
+119:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 35000 Pa:fcst time 0 hrs:from 202101010000
+120:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 35000 Pa:fcst time 0 hrs:from 202101010000
+121:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 37500 Pa:fcst time 0 hrs:from 202101010000
+122:Temperature:K (instant):lambert:isobaricInhPa:level 37500 Pa:fcst time 0 hrs:from 202101010000
+123:Relative humidity:% (instant):lambert:isobaricInhPa:level 37500 Pa:fcst time 0 hrs:from 202101010000
+124:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 37500 Pa:fcst time 0 hrs:from 202101010000
+125:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 37500 Pa:fcst time 0 hrs:from 202101010000
+126:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 37500 Pa:fcst time 0 hrs:from 202101010000
+127:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 37500 Pa:fcst time 0 hrs:from 202101010000
+128:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 37500 Pa:fcst time 0 hrs:from 202101010000
+129:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 40000 Pa:fcst time 0 hrs:from 202101010000
+130:Temperature:K (instant):lambert:isobaricInhPa:level 40000 Pa:fcst time 0 hrs:from 202101010000
+131:Relative humidity:% (instant):lambert:isobaricInhPa:level 40000 Pa:fcst time 0 hrs:from 202101010000
+132:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 40000 Pa:fcst time 0 hrs:from 202101010000
+133:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 40000 Pa:fcst time 0 hrs:from 202101010000
+134:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 40000 Pa:fcst time 0 hrs:from 202101010000
+135:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 40000 Pa:fcst time 0 hrs:from 202101010000
+136:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 40000 Pa:fcst time 0 hrs:from 202101010000
+137:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 42500 Pa:fcst time 0 hrs:from 202101010000
+138:Temperature:K (instant):lambert:isobaricInhPa:level 42500 Pa:fcst time 0 hrs:from 202101010000
+139:Relative humidity:% (instant):lambert:isobaricInhPa:level 42500 Pa:fcst time 0 hrs:from 202101010000
+140:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 42500 Pa:fcst time 0 hrs:from 202101010000
+141:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 42500 Pa:fcst time 0 hrs:from 202101010000
+142:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 42500 Pa:fcst time 0 hrs:from 202101010000
+143:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 42500 Pa:fcst time 0 hrs:from 202101010000
+144:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 42500 Pa:fcst time 0 hrs:from 202101010000
+145:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 45000 Pa:fcst time 0 hrs:from 202101010000
+146:Temperature:K (instant):lambert:isobaricInhPa:level 45000 Pa:fcst time 0 hrs:from 202101010000
+147:Relative humidity:% (instant):lambert:isobaricInhPa:level 45000 Pa:fcst time 0 hrs:from 202101010000
+148:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 45000 Pa:fcst time 0 hrs:from 202101010000
+149:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 45000 Pa:fcst time 0 hrs:from 202101010000
+150:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 45000 Pa:fcst time 0 hrs:from 202101010000
+151:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 45000 Pa:fcst time 0 hrs:from 202101010000
+152:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 45000 Pa:fcst time 0 hrs:from 202101010000
+153:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 47500 Pa:fcst time 0 hrs:from 202101010000
+154:Temperature:K (instant):lambert:isobaricInhPa:level 47500 Pa:fcst time 0 hrs:from 202101010000
+155:Relative humidity:% (instant):lambert:isobaricInhPa:level 47500 Pa:fcst time 0 hrs:from 202101010000
+156:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 47500 Pa:fcst time 0 hrs:from 202101010000
+157:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 47500 Pa:fcst time 0 hrs:from 202101010000
+158:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 47500 Pa:fcst time 0 hrs:from 202101010000
+159:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 47500 Pa:fcst time 0 hrs:from 202101010000
+160:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 47500 Pa:fcst time 0 hrs:from 202101010000
+161:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 50000 Pa:fcst time 0 hrs:from 202101010000
+162:Temperature:K (instant):lambert:isobaricInhPa:level 50000 Pa:fcst time 0 hrs:from 202101010000
+163:Relative humidity:% (instant):lambert:isobaricInhPa:level 50000 Pa:fcst time 0 hrs:from 202101010000
+164:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 50000 Pa:fcst time 0 hrs:from 202101010000
+165:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 50000 Pa:fcst time 0 hrs:from 202101010000
+166:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 50000 Pa:fcst time 0 hrs:from 202101010000
+167:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 50000 Pa:fcst time 0 hrs:from 202101010000
+168:Absolute vorticity:s**-1 (instant):lambert:isobaricInhPa:level 50000 Pa:fcst time 0 hrs:from 202101010000
+169:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 50000 Pa:fcst time 0 hrs:from 202101010000
+170:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 52500 Pa:fcst time 0 hrs:from 202101010000
+171:Temperature:K (instant):lambert:isobaricInhPa:level 52500 Pa:fcst time 0 hrs:from 202101010000
+172:Relative humidity:% (instant):lambert:isobaricInhPa:level 52500 Pa:fcst time 0 hrs:from 202101010000
+173:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 52500 Pa:fcst time 0 hrs:from 202101010000
+174:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 52500 Pa:fcst time 0 hrs:from 202101010000
+175:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 52500 Pa:fcst time 0 hrs:from 202101010000
+176:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 52500 Pa:fcst time 0 hrs:from 202101010000
+177:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 52500 Pa:fcst time 0 hrs:from 202101010000
+178:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 55000 Pa:fcst time 0 hrs:from 202101010000
+179:Temperature:K (instant):lambert:isobaricInhPa:level 55000 Pa:fcst time 0 hrs:from 202101010000
+180:Relative humidity:% (instant):lambert:isobaricInhPa:level 55000 Pa:fcst time 0 hrs:from 202101010000
+181:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 55000 Pa:fcst time 0 hrs:from 202101010000
+182:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 55000 Pa:fcst time 0 hrs:from 202101010000
+183:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 55000 Pa:fcst time 0 hrs:from 202101010000
+184:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 55000 Pa:fcst time 0 hrs:from 202101010000
+185:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 55000 Pa:fcst time 0 hrs:from 202101010000
+186:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 57500 Pa:fcst time 0 hrs:from 202101010000
+187:Temperature:K (instant):lambert:isobaricInhPa:level 57500 Pa:fcst time 0 hrs:from 202101010000
+188:Relative humidity:% (instant):lambert:isobaricInhPa:level 57500 Pa:fcst time 0 hrs:from 202101010000
+189:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 57500 Pa:fcst time 0 hrs:from 202101010000
+190:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 57500 Pa:fcst time 0 hrs:from 202101010000
+191:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 57500 Pa:fcst time 0 hrs:from 202101010000
+192:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 57500 Pa:fcst time 0 hrs:from 202101010000
+193:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 57500 Pa:fcst time 0 hrs:from 202101010000
+194:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 60000 Pa:fcst time 0 hrs:from 202101010000
+195:Temperature:K (instant):lambert:isobaricInhPa:level 60000 Pa:fcst time 0 hrs:from 202101010000
+196:Relative humidity:% (instant):lambert:isobaricInhPa:level 60000 Pa:fcst time 0 hrs:from 202101010000
+197:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 60000 Pa:fcst time 0 hrs:from 202101010000
+198:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 60000 Pa:fcst time 0 hrs:from 202101010000
+199:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 60000 Pa:fcst time 0 hrs:from 202101010000
+200:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 60000 Pa:fcst time 0 hrs:from 202101010000
+201:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 60000 Pa:fcst time 0 hrs:from 202101010000
+202:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 62500 Pa:fcst time 0 hrs:from 202101010000
+203:Temperature:K (instant):lambert:isobaricInhPa:level 62500 Pa:fcst time 0 hrs:from 202101010000
+204:Relative humidity:% (instant):lambert:isobaricInhPa:level 62500 Pa:fcst time 0 hrs:from 202101010000
+205:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 62500 Pa:fcst time 0 hrs:from 202101010000
+206:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 62500 Pa:fcst time 0 hrs:from 202101010000
+207:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 62500 Pa:fcst time 0 hrs:from 202101010000
+208:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 62500 Pa:fcst time 0 hrs:from 202101010000
+209:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 62500 Pa:fcst time 0 hrs:from 202101010000
+210:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 65000 Pa:fcst time 0 hrs:from 202101010000
+211:Temperature:K (instant):lambert:isobaricInhPa:level 65000 Pa:fcst time 0 hrs:from 202101010000
+212:Relative humidity:% (instant):lambert:isobaricInhPa:level 65000 Pa:fcst time 0 hrs:from 202101010000
+213:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 65000 Pa:fcst time 0 hrs:from 202101010000
+214:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 65000 Pa:fcst time 0 hrs:from 202101010000
+215:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 65000 Pa:fcst time 0 hrs:from 202101010000
+216:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 65000 Pa:fcst time 0 hrs:from 202101010000
+217:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 65000 Pa:fcst time 0 hrs:from 202101010000
+218:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 67500 Pa:fcst time 0 hrs:from 202101010000
+219:Temperature:K (instant):lambert:isobaricInhPa:level 67500 Pa:fcst time 0 hrs:from 202101010000
+220:Relative humidity:% (instant):lambert:isobaricInhPa:level 67500 Pa:fcst time 0 hrs:from 202101010000
+221:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 67500 Pa:fcst time 0 hrs:from 202101010000
+222:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 67500 Pa:fcst time 0 hrs:from 202101010000
+223:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 67500 Pa:fcst time 0 hrs:from 202101010000
+224:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 67500 Pa:fcst time 0 hrs:from 202101010000
+225:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 67500 Pa:fcst time 0 hrs:from 202101010000
+226:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 70000 Pa:fcst time 0 hrs:from 202101010000
+227:Temperature:K (instant):lambert:isobaricInhPa:level 70000 Pa:fcst time 0 hrs:from 202101010000
+228:Relative humidity:% (instant):lambert:isobaricInhPa:level 70000 Pa:fcst time 0 hrs:from 202101010000
+229:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 70000 Pa:fcst time 0 hrs:from 202101010000
+230:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 70000 Pa:fcst time 0 hrs:from 202101010000
+231:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 70000 Pa:fcst time 0 hrs:from 202101010000
+232:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 70000 Pa:fcst time 0 hrs:from 202101010000
+233:Absolute vorticity:s**-1 (instant):lambert:isobaricInhPa:level 70000 Pa:fcst time 0 hrs:from 202101010000
+234:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 70000 Pa:fcst time 0 hrs:from 202101010000
+235:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 72500 Pa:fcst time 0 hrs:from 202101010000
+236:Temperature:K (instant):lambert:isobaricInhPa:level 72500 Pa:fcst time 0 hrs:from 202101010000
+237:Relative humidity:% (instant):lambert:isobaricInhPa:level 72500 Pa:fcst time 0 hrs:from 202101010000
+238:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 72500 Pa:fcst time 0 hrs:from 202101010000
+239:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 72500 Pa:fcst time 0 hrs:from 202101010000
+240:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 72500 Pa:fcst time 0 hrs:from 202101010000
+241:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 72500 Pa:fcst time 0 hrs:from 202101010000
+242:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 72500 Pa:fcst time 0 hrs:from 202101010000
+243:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 75000 Pa:fcst time 0 hrs:from 202101010000
+244:Temperature:K (instant):lambert:isobaricInhPa:level 75000 Pa:fcst time 0 hrs:from 202101010000
+245:Relative humidity:% (instant):lambert:isobaricInhPa:level 75000 Pa:fcst time 0 hrs:from 202101010000
+246:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 75000 Pa:fcst time 0 hrs:from 202101010000
+247:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 75000 Pa:fcst time 0 hrs:from 202101010000
+248:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 75000 Pa:fcst time 0 hrs:from 202101010000
+249:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 75000 Pa:fcst time 0 hrs:from 202101010000
+250:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 75000 Pa:fcst time 0 hrs:from 202101010000
+251:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 77500 Pa:fcst time 0 hrs:from 202101010000
+252:Temperature:K (instant):lambert:isobaricInhPa:level 77500 Pa:fcst time 0 hrs:from 202101010000
+253:Relative humidity:% (instant):lambert:isobaricInhPa:level 77500 Pa:fcst time 0 hrs:from 202101010000
+254:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 77500 Pa:fcst time 0 hrs:from 202101010000
+255:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 77500 Pa:fcst time 0 hrs:from 202101010000
+256:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 77500 Pa:fcst time 0 hrs:from 202101010000
+257:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 77500 Pa:fcst time 0 hrs:from 202101010000
+258:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 77500 Pa:fcst time 0 hrs:from 202101010000
+259:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 80000 Pa:fcst time 0 hrs:from 202101010000
+260:Temperature:K (instant):lambert:isobaricInhPa:level 80000 Pa:fcst time 0 hrs:from 202101010000
+261:Relative humidity:% (instant):lambert:isobaricInhPa:level 80000 Pa:fcst time 0 hrs:from 202101010000
+262:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 80000 Pa:fcst time 0 hrs:from 202101010000
+263:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 80000 Pa:fcst time 0 hrs:from 202101010000
+264:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 80000 Pa:fcst time 0 hrs:from 202101010000
+265:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 80000 Pa:fcst time 0 hrs:from 202101010000
+266:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 80000 Pa:fcst time 0 hrs:from 202101010000
+267:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 82500 Pa:fcst time 0 hrs:from 202101010000
+268:Temperature:K (instant):lambert:isobaricInhPa:level 82500 Pa:fcst time 0 hrs:from 202101010000
+269:Relative humidity:% (instant):lambert:isobaricInhPa:level 82500 Pa:fcst time 0 hrs:from 202101010000
+270:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 82500 Pa:fcst time 0 hrs:from 202101010000
+271:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 82500 Pa:fcst time 0 hrs:from 202101010000
+272:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 82500 Pa:fcst time 0 hrs:from 202101010000
+273:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 82500 Pa:fcst time 0 hrs:from 202101010000
+274:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 82500 Pa:fcst time 0 hrs:from 202101010000
+275:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 85000 Pa:fcst time 0 hrs:from 202101010000
+276:Temperature:K (instant):lambert:isobaricInhPa:level 85000 Pa:fcst time 0 hrs:from 202101010000
+277:Relative humidity:% (instant):lambert:isobaricInhPa:level 85000 Pa:fcst time 0 hrs:from 202101010000
+278:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 85000 Pa:fcst time 0 hrs:from 202101010000
+279:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 85000 Pa:fcst time 0 hrs:from 202101010000
+280:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 85000 Pa:fcst time 0 hrs:from 202101010000
+281:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 85000 Pa:fcst time 0 hrs:from 202101010000
+282:Absolute vorticity:s**-1 (instant):lambert:isobaricInhPa:level 85000 Pa:fcst time 0 hrs:from 202101010000
+283:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 85000 Pa:fcst time 0 hrs:from 202101010000
+284:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 87500 Pa:fcst time 0 hrs:from 202101010000
+285:Temperature:K (instant):lambert:isobaricInhPa:level 87500 Pa:fcst time 0 hrs:from 202101010000
+286:Relative humidity:% (instant):lambert:isobaricInhPa:level 87500 Pa:fcst time 0 hrs:from 202101010000
+287:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 87500 Pa:fcst time 0 hrs:from 202101010000
+288:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 87500 Pa:fcst time 0 hrs:from 202101010000
+289:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 87500 Pa:fcst time 0 hrs:from 202101010000
+290:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 87500 Pa:fcst time 0 hrs:from 202101010000
+291:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 87500 Pa:fcst time 0 hrs:from 202101010000
+292:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 90000 Pa:fcst time 0 hrs:from 202101010000
+293:Temperature:K (instant):lambert:isobaricInhPa:level 90000 Pa:fcst time 0 hrs:from 202101010000
+294:Relative humidity:% (instant):lambert:isobaricInhPa:level 90000 Pa:fcst time 0 hrs:from 202101010000
+295:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 90000 Pa:fcst time 0 hrs:from 202101010000
+296:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 90000 Pa:fcst time 0 hrs:from 202101010000
+297:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 90000 Pa:fcst time 0 hrs:from 202101010000
+298:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 90000 Pa:fcst time 0 hrs:from 202101010000
+299:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 90000 Pa:fcst time 0 hrs:from 202101010000
+300:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 92500 Pa:fcst time 0 hrs:from 202101010000
+301:Temperature:K (instant):lambert:isobaricInhPa:level 92500 Pa:fcst time 0 hrs:from 202101010000
+302:Relative humidity:% (instant):lambert:isobaricInhPa:level 92500 Pa:fcst time 0 hrs:from 202101010000
+303:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 92500 Pa:fcst time 0 hrs:from 202101010000
+304:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 92500 Pa:fcst time 0 hrs:from 202101010000
+305:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 92500 Pa:fcst time 0 hrs:from 202101010000
+306:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 92500 Pa:fcst time 0 hrs:from 202101010000
+307:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 92500 Pa:fcst time 0 hrs:from 202101010000
+308:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 95000 Pa:fcst time 0 hrs:from 202101010000
+309:Temperature:K (instant):lambert:isobaricInhPa:level 95000 Pa:fcst time 0 hrs:from 202101010000
+310:Relative humidity:% (instant):lambert:isobaricInhPa:level 95000 Pa:fcst time 0 hrs:from 202101010000
+311:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 95000 Pa:fcst time 0 hrs:from 202101010000
+312:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 95000 Pa:fcst time 0 hrs:from 202101010000
+313:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 95000 Pa:fcst time 0 hrs:from 202101010000
+314:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 95000 Pa:fcst time 0 hrs:from 202101010000
+315:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 95000 Pa:fcst time 0 hrs:from 202101010000
+316:Haines Index:Numeric (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+317:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 97500 Pa:fcst time 0 hrs:from 202101010000
+318:Temperature:K (instant):lambert:isobaricInhPa:level 97500 Pa:fcst time 0 hrs:from 202101010000
+319:Relative humidity:% (instant):lambert:isobaricInhPa:level 97500 Pa:fcst time 0 hrs:from 202101010000
+320:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 97500 Pa:fcst time 0 hrs:from 202101010000
+321:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 97500 Pa:fcst time 0 hrs:from 202101010000
+322:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 97500 Pa:fcst time 0 hrs:from 202101010000
+323:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 97500 Pa:fcst time 0 hrs:from 202101010000
+324:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 97500 Pa:fcst time 0 hrs:from 202101010000
+325:Temperature:K (instant):lambert:isobaricInhPa:level 100000 Pa:fcst time 0 hrs:from 202101010000
+326:Relative humidity:% (instant):lambert:isobaricInhPa:level 100000 Pa:fcst time 0 hrs:from 202101010000
+327:Vertical velocity:Pa s**-1 (instant):lambert:isobaricInhPa:level 100000 Pa:fcst time 0 hrs:from 202101010000
+328:Geometric vertical velocity:m s**-1 (instant):lambert:isobaricInhPa:level 100000 Pa:fcst time 0 hrs:from 202101010000
+329:U component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 100000 Pa:fcst time 0 hrs:from 202101010000
+330:V component of wind:m s**-1 (instant):lambert:isobaricInhPa:level 100000 Pa:fcst time 0 hrs:from 202101010000
+331:Absolute vorticity:s**-1 (instant):lambert:isobaricInhPa:level 100000 Pa:fcst time 0 hrs:from 202101010000
+332:Turbulent kinetic energy:J kg**-1 (instant):lambert:isobaricInhPa:level 100000 Pa:fcst time 0 hrs:from 202101010000
+333:MSLP (Eta model reduction):Pa (instant):lambert:meanSea:level 0:fcst time 0 hrs:from 202101010000
+334:Geopotential Height:gpm (instant):lambert:isobaricInhPa:level 100000 Pa:fcst time 0 hrs:from 202101010000
+335:Derived radar reflectivity:dB (instant):lambert:heightAboveGround:level 4000 m:fcst time 0 hrs:from 202101010000
+336:Derived radar reflectivity:dB (instant):lambert:heightAboveGround:level 1000 m:fcst time 0 hrs:from 202101010000
+337:Surface pressure:Pa (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+338:Orography:m (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+339:Temperature:K (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+340:Soil Temperature:K (instant):lambert:depthBelowLandLayer:levels 0.0-0.1 m:fcst time 0 hrs:from 202101010000
+341:Volumetric soil moisture content:Proportion (instant):lambert:depthBelowLandLayer:levels 0.0-0.1 m:fcst time 0 hrs:from 202101010000
+342:Liquid volumetric soil moisture (non-frozen):Proportion (instant):lambert:depthBelowLandLayer:levels 0.0-0.1 m:fcst time 0 hrs:from 202101010000
+343:Soil Temperature:K (instant):lambert:depthBelowLandLayer:levels 0.1-0.4 m:fcst time 0 hrs:from 202101010000
+344:Volumetric soil moisture content:Proportion (instant):lambert:depthBelowLandLayer:levels 0.1-0.4 m:fcst time 0 hrs:from 202101010000
+345:Liquid volumetric soil moisture (non-frozen):Proportion (instant):lambert:depthBelowLandLayer:levels 0.1-0.4 m:fcst time 0 hrs:from 202101010000
+346:Soil Temperature:K (instant):lambert:depthBelowLandLayer:levels 0.4-1.0 m:fcst time 0 hrs:from 202101010000
+347:Volumetric soil moisture content:Proportion (instant):lambert:depthBelowLandLayer:levels 0.4-1.0 m:fcst time 0 hrs:from 202101010000
+348:Liquid volumetric soil moisture (non-frozen):Proportion (instant):lambert:depthBelowLandLayer:levels 0.4-1.0 m:fcst time 0 hrs:from 202101010000
+349:Soil Temperature:K (instant):lambert:depthBelowLandLayer:levels 1.0-2.0 m:fcst time 0 hrs:from 202101010000
+350:Volumetric soil moisture content:Proportion (instant):lambert:depthBelowLandLayer:levels 1.0-2.0 m:fcst time 0 hrs:from 202101010000
+351:Liquid volumetric soil moisture (non-frozen):Proportion (instant):lambert:depthBelowLandLayer:levels 1.0-2.0 m:fcst time 0 hrs:from 202101010000
+352:Soil Temperature:K (instant):lambert:depthBelowLand:level 3 m:fcst time 0 hrs:from 202101010000
+353:Moisture availability:% (instant):lambert:depthBelowLandLayer:levels 0.0-1.0 m:fcst time 0 hrs:from 202101010000
+354:Soil moisture content:kg m**-2 (instant):lambert:depthBelowLandLayer:levels 0.0-2.0 m:fcst time 0 hrs:from 202101010000
+355:Plant canopy surface water:kg m**-2 (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+356:Water equivalent of accumulated snow depth (deprecated):kg m**-2 (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+357:Snow cover:% (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+358:Snow depth:m (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+359:Direct evaporation cease (soil moisture):Proportion (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+360:Soil porosity:Proportion (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+361:2 metre temperature:K (instant):lambert:heightAboveGround:level 2 m:fcst time 0 hrs:from 202101010000
+362:2 metre specific humidity:kg kg**-1 (instant):lambert:heightAboveGround:level 2 m:fcst time 0 hrs:from 202101010000
+363:2 metre dewpoint temperature:K (instant):lambert:heightAboveGround:level 2 m:fcst time 0 hrs:from 202101010000
+364:2 metre relative humidity:% (instant):lambert:heightAboveGround:level 2 m:fcst time 0 hrs:from 202101010000
+365:10 metre U wind component:m s**-1 (instant):lambert:heightAboveGround:level 10 m:fcst time 0 hrs:from 202101010000
+366:10 metre V wind component:m s**-1 (instant):lambert:heightAboveGround:level 10 m:fcst time 0 hrs:from 202101010000
+367:Total Precipitation:kg m**-2 (accum):lambert:surface:level 0:fcst time 0 hrs (accum):from 202101010000
+368:Convective precipitation (water):kg m**-2 (accum):lambert:surface:level 0:fcst time 0 hrs (accum):from 202101010000
+369:Water equivalent of accumulated snow depth (deprecated):kg m**-2 (accum):lambert:surface:level 0:fcst time 0 hrs (accum):from 202101010000
+370:Geopotential Height:gpm (instant):lambert:lowestLevelWetBulb0:level 0:fcst time 0 hrs:from 202101010000
+371:Categorical snow:(Code table 4.222) (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+372:Categorical ice pellets:(Code table 4.222) (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+373:Categorical freezing rain:(Code table 4.222) (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+374:Categorical rain:(Code table 4.222) (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+375:Surface roughness:m (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+376:Frictional velocity:m s**-1 (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+377:Drag coefficient:Numeric (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+378:Vegetation:% (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+379:Vegetation Type:Integer(0-13) (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+380:Soil type:~ (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+381:Number of soil layers in root zone:Numeric (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+382:Wilting Point:Fraction (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+383:Transpiration stress-onset (soil moisture):Proportion (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+384:Surface lifted index:K (instant):lambert:isobaricLayer:levels 50000-100000 Pa:fcst time 0 hrs:from 202101010000
+385:Convective available potential energy:J kg**-1 (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+386:Convective inhibition:J kg**-1 (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+387:Precipitable water:kg m**-2 (instant):lambert:atmosphereSingleLayer:level 0 considered as a single layer:fcst time 0 hrs:from 202101010000
+388:Geopotential Height:gpm (instant):lambert:cloudBase:level 0:fcst time 0 hrs:from 202101010000
+389:Storm relative helicity:J kg**-1 (instant):lambert:heightAboveGroundLayer:levels 3000-0 m:fcst time 0 hrs:from 202101010000
+390:Vertical u-component shear:s**-1 (instant):lambert:heightAboveGroundLayer:levels 0-6000 m:fcst time 0 hrs:from 202101010000
+391:Vertical v-component shear:s**-1 (instant):lambert:heightAboveGroundLayer:levels 0-6000 m:fcst time 0 hrs:from 202101010000
+392:Tropopause pressure:Pa (instant):lambert:tropopause:level 0:fcst time 0 hrs:from 202101010000
+393:Temperature:K (instant):lambert:tropopause:level 0:fcst time 0 hrs:from 202101010000
+394:U component of wind:m s**-1 (instant):lambert:tropopause:level 0:fcst time 0 hrs:from 202101010000
+395:V component of wind:m s**-1 (instant):lambert:tropopause:level 0:fcst time 0 hrs:from 202101010000
+396:Pressure:Pa (instant):lambert:maxWind:level 0:fcst time 0 hrs:from 202101010000
+397:U component of wind:m s**-1 (instant):lambert:maxWind:level 0:fcst time 0 hrs:from 202101010000
+398:V component of wind:m s**-1 (instant):lambert:maxWind:level 0:fcst time 0 hrs:from 202101010000
+399:Temperature:K (instant):lambert:heightAboveGround:level 80 m:fcst time 0 hrs:from 202101010000
+400:Specific humidity:kg kg**-1 (instant):lambert:heightAboveGround:level 80 m:fcst time 0 hrs:from 202101010000
+401:Pressure:Pa (instant):lambert:heightAboveGround:level 80 m:fcst time 0 hrs:from 202101010000
+402:U component of wind:m s**-1 (instant):lambert:heightAboveGround:level 80 m:fcst time 0 hrs:from 202101010000
+403:V component of wind:m s**-1 (instant):lambert:heightAboveGround:level 80 m:fcst time 0 hrs:from 202101010000
+404:Geopotential Height:gpm (instant):lambert:isothermZero:level 0:fcst time 0 hrs:from 202101010000
+405:Relative humidity:% (instant):lambert:isothermZero:level 0:fcst time 0 hrs:from 202101010000
+406:Temperature:K (instant):lambert:pressureFromGroundLayer:levels 3000-0 Pa:fcst time 0 hrs:from 202101010000
+407:Relative humidity:% (instant):lambert:pressureFromGroundLayer:levels 3000-0 Pa:fcst time 0 hrs:from 202101010000
+408:U component of wind:m s**-1 (instant):lambert:pressureFromGroundLayer:levels 3000-0 Pa:fcst time 0 hrs:from 202101010000
+409:V component of wind:m s**-1 (instant):lambert:pressureFromGroundLayer:levels 3000-0 Pa:fcst time 0 hrs:from 202101010000
+410:Parcel lifted index (to 500 hPa):K (instant):lambert:pressureFromGroundLayer:levels 3000-0 Pa:fcst time 0 hrs:from 202101010000
+411:Temperature:K (instant):lambert:pressureFromGroundLayer:levels 6000-3000 Pa:fcst time 0 hrs:from 202101010000
+412:Relative humidity:% (instant):lambert:pressureFromGroundLayer:levels 6000-3000 Pa:fcst time 0 hrs:from 202101010000
+413:U component of wind:m s**-1 (instant):lambert:pressureFromGroundLayer:levels 6000-3000 Pa:fcst time 0 hrs:from 202101010000
+414:V component of wind:m s**-1 (instant):lambert:pressureFromGroundLayer:levels 6000-3000 Pa:fcst time 0 hrs:from 202101010000
+415:Temperature:K (instant):lambert:pressureFromGroundLayer:levels 9000-6000 Pa:fcst time 0 hrs:from 202101010000
+416:Relative humidity:% (instant):lambert:pressureFromGroundLayer:levels 9000-6000 Pa:fcst time 0 hrs:from 202101010000
+417:U component of wind:m s**-1 (instant):lambert:pressureFromGroundLayer:levels 9000-6000 Pa:fcst time 0 hrs:from 202101010000
+418:V component of wind:m s**-1 (instant):lambert:pressureFromGroundLayer:levels 9000-6000 Pa:fcst time 0 hrs:from 202101010000
+419:Temperature:K (instant):lambert:pressureFromGroundLayer:levels 12000-9000 Pa:fcst time 0 hrs:from 202101010000
+420:Relative humidity:% (instant):lambert:pressureFromGroundLayer:levels 12000-9000 Pa:fcst time 0 hrs:from 202101010000
+421:U component of wind:m s**-1 (instant):lambert:pressureFromGroundLayer:levels 12000-9000 Pa:fcst time 0 hrs:from 202101010000
+422:V component of wind:m s**-1 (instant):lambert:pressureFromGroundLayer:levels 12000-9000 Pa:fcst time 0 hrs:from 202101010000
+423:Temperature:K (instant):lambert:pressureFromGroundLayer:levels 15000-12000 Pa:fcst time 0 hrs:from 202101010000
+424:Relative humidity:% (instant):lambert:pressureFromGroundLayer:levels 15000-12000 Pa:fcst time 0 hrs:from 202101010000
+425:U component of wind:m s**-1 (instant):lambert:pressureFromGroundLayer:levels 15000-12000 Pa:fcst time 0 hrs:from 202101010000
+426:V component of wind:m s**-1 (instant):lambert:pressureFromGroundLayer:levels 15000-12000 Pa:fcst time 0 hrs:from 202101010000
+427:Temperature:K (instant):lambert:pressureFromGroundLayer:levels 18000-15000 Pa:fcst time 0 hrs:from 202101010000
+428:Relative humidity:% (instant):lambert:pressureFromGroundLayer:levels 18000-15000 Pa:fcst time 0 hrs:from 202101010000
+429:U component of wind:m s**-1 (instant):lambert:pressureFromGroundLayer:levels 18000-15000 Pa:fcst time 0 hrs:from 202101010000
+430:V component of wind:m s**-1 (instant):lambert:pressureFromGroundLayer:levels 18000-15000 Pa:fcst time 0 hrs:from 202101010000
+431:Best (4-layer) lifted index:K (instant):lambert:pressureFromGroundLayer:levels 18000-0 Pa:fcst time 0 hrs:from 202101010000
+432:Convective available potential energy:J kg**-1 (instant):lambert:pressureFromGroundLayer:levels 18000-0 Pa:fcst time 0 hrs:from 202101010000
+433:Convective inhibition:J kg**-1 (instant):lambert:pressureFromGroundLayer:levels 18000-0 Pa:fcst time 0 hrs:from 202101010000
+434:Planetary boundary layer height:m (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+435:Relative humidity:% (instant):lambert:sigmaLayer:levels 0.33-1.0 sigma value:fcst time 0 hrs:from 202101010000
+436:Lightning:dimensionless (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+437:Land-sea mask:(0 - 1) (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+438:Sea ice area fraction:(0 - 1) (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+439:Albedo:% (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+440:Sensible heat net flux:W m**-2 (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+441:Latent heat net flux:W m**-2 (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+442:Total Cloud Cover:% (instant):lambert:atmosphereSingleLayer:level 0 considered as a single layer:fcst time 0 hrs:from 202101010000
+443:Downward short-wave radiation flux:W m**-2 (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+444:Downward long-wave radiation flux:W m**-2 (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+445:Upward short-wave radiation flux:W m**-2 (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000
+446:Upward long-wave radiation flux:W m**-2 (instant):lambert:surface:level 0:fcst time 0 hrs:from 202101010000

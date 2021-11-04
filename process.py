@@ -15,8 +15,40 @@ gisjoin_to_row_col = {}
 
 is_loaded = False
 
-grb_2_fields = {
-
+# Fields we want from the .grb2 files:
+# (<grb_row_index>, <assigned_field_name>)
+selected_grb_2_fields = {
+    (1,   "PRESSURE_REDUCED_TO_MSL_PASCAL"),
+    (4,   "VISIBILITY_AT_SURFACE_METERS"),
+    (5,   "VISIBILITY_AT_CLOUD_TOP_METERS"),
+    (8,   "U_COMPONENT_OF_WIND_AT_PLANETARY_BOUNDARY_LAYER_METERS_PER_SEC"),
+    (9,   "V_COMPONENT_OF_WIND_AT_PLANETARY_BOUNDARY_LAYER_METERS_PER_SEC"),
+    (11,  "WIND_GUST_SPEED_AT_SURFACE_METERS_PER_SEC"),
+    (337, "PRESSURE_AT_SURFACE_PASCAL"),
+    (339, "TEMPERATURE_AT_SURFACE_KELVIN"),
+    (340, "SOIL_TEMPERATURE_0_TO_0.1_M_BELOW_SURFACE_KELVIN"),
+    (341, "VOLUMETRIC_SOIL_MOISTURE_CONTENT_0_TO_0.1_M_BELOW_SURFACE_FRACTION"),
+    (357, "SNOW_COVER_AT_SURFACE_PERCENT"),
+    (358, "SNOW_DEPTH_AT_SURFACE_METERS"),
+    (361, "TEMPERATURE_2_METERS_ABOVE_SURFACE_KELVIN"),
+    (363, "DEWPOINT_TEMPERATURE_2_METERS_ABOVE_SURFACE_KELVIN"),
+    (364, "RELATIVE_HUMIDITY_2_METERS_ABOVE_SURFACE_PERCENT"),
+    (365, "U_COMPONENT_OF_WIND_2_METERS_ABOVE_SURFACE_METERS_PER_SEC"),
+    (365, "V_COMPONENT_OF_WIND_2_METERS_ABOVE_SURFACE_METERS_PER_SEC"),
+    (367, "TOTAL_PRECIPITATION_SURFACE_ACCUM_KG_PER_SQ_METER"),
+    (368, "CONVECTIVE_PRECIPITATION_SURFACE_ACCUM_KG_PER_SQ_METER"),
+    (370, "GEOPOTENTIAL_HEIGHT_LOWEST_LEVEL_WET_BULB_ZERO_GPM"),
+    (371, "CATEGORICAL_SNOW_SURFACE_BINARY"),
+    (372, "CATEGORICAL_ICE_PELLETS_SURFACE_BINARY"),
+    (373, "CATEGORICAL_FREEZING_RAIN_SURFACE_BINARY"),
+    (374, "CATEGORICAL_RAIN_SURFACE_BINARY"),
+    (378, "VEGETATION_SURFACE_PERCENT"),
+    (379, "VEGETATION_TYPE_SIB_INT"),
+    (380, "SOIL_TYPE_ZOBLER_INT"),
+    (392, "PRESSURE_TROPOPAUSE_PASCAL"),
+    (393, "TEMPERATURE_TROPOPAUSE_KELVIN"),
+    (394, "U_COMPONENT_OF_WIND_TROPOPAUSE_METERS_PER_SEC"),
+    (395, "U_COMPONENT_OF_WIND_TROPOPAUSE_METERS_PER_SEC")
 }
 
 
@@ -109,39 +141,18 @@ def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, sta
     year_month_day_hour = f"{year}{month}{day}{hour}"
     out_file = f"{out_path}/{year}_{month}_{day}_{hour}_{timestep}.csv"
 
-    selected_fields = [
-        (1, "Mean sea level pressure", "MEAN_SEA_LEVEL_PRESSURE_PASCAL"),
-        (3, "Surface pressure", "PRESSURE"),
-        (4, "Orography", "orography_surface_level_meters"),
-        (5, "Temperature", "temp_surface_level_kelvin"),
-        (6, "2 metre temperature", "2_metre_temp_kelvin"),
-        (7, "2 metre dewpoint temperature", "2_metre_dewpoint_temp_kelvin"),
-        (8, "Relative humidity", "relative_humidity_percent"),
-        (9, "10 metre U wind component", "10_metre_u_wind_component_meters_per_second"),
-        (10, "10 metre V wind component", "10_metre_v_wind_component_meters_per_second"),
-        (11, "Total Precipitation", "total_precipitation_kg_per_squared_meter"),
-        (12, "Convective precipitation (water)", "water_convection_precipitation_kg_per_squared_meter"),
-        (291, "Soil Temperature", "soil_temperature_kelvin"),
-        (339, "Pressure", "pressure_pascal"),
-        (347, "Visibility", "visibility_meters"),
-        (348, "Precipitable water", "precipitable_water_kg_per_squared_meter"),
-        (358, "Total Cloud Cover", "total_cloud_cover_percent"),
-        (362, "Snow depth", "snow_depth_meters"),
-        (382, "Ice cover (1=ice, 0=no ice)", "ice_cover_binary")
-    ]
-
     print(f"Processing/Writing {out_file}...")
 
     with open(out_file, "w") as f:
         # Create csv header row with new column names
-        csv_header_row = "year_month_day_hour,timestep,gis_join,latitude,longitude,"
-        csv_header_row += ",".join([field[2] for field in selected_fields])
+        csv_header_row = "YYYYMMDDHH,TIMESTEP,GISJOIN,LATITUDE,LONGITUDE,"
+        csv_header_row += ",".join([field[2] for field in selected_grb_2_fields])
         f.write(csv_header_row + "\n")
 
         # Build values list
         values_list = []
         before = time.time()
-        for selected_field in selected_fields:
+        for selected_field in selected_grb_2_fields:
             grb_index = selected_field[0]
             grb = grbs.message(grb_index)
             values_list.append(grb.values)
