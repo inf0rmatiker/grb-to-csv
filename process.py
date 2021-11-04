@@ -15,6 +15,11 @@ gisjoin_to_row_col = {}
 
 is_loaded = False
 
+grb_2_fields = {
+
+}
+
+
 # Finds the GISJoin that a lat/lon point falls into.
 # If the point doesn't fall into any GISJoin, None is returned.
 def lat_lon_to_gisjoin(mongo_client, lat, lon):
@@ -75,14 +80,13 @@ def read_gisjoin_to_row_col_mappings(csv_file):
         gisjoin = df_row['gisjoin']
 
         if gisjoin not in gisjoin_to_row_col:
-            gisjoin_to_row_col[gisjoin] = [(row,col)]
+            gisjoin_to_row_col[gisjoin] = [(row, col)]
         else:
-            gisjoin_to_row_col[gisjoin].append((row,col))
+            gisjoin_to_row_col[gisjoin].append((row, col))
 
 
 def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, start_time,
                        lat_lon_to_gisjoin_mappings_file):
-
     global is_loaded
 
     if not is_loaded:
@@ -105,8 +109,8 @@ def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, sta
     out_file = f"{out_path}/{year}_{month}_{day}_{hour}_{timestep}.csv"
 
     selected_fields = [
-        (2, "Mean sea level pressure", "mean_sea_level_pressure_pascal"),
-        (3, "Surface pressure", "surface_pressure_surface_level_pascal"),
+        (1, "Mean sea level pressure", "MEAN_SEA_LEVEL_PRESSURE_PASCAL"),
+        (3, "Surface pressure", "PRESSURE"),
         (4, "Orography", "orography_surface_level_meters"),
         (5, "Temperature", "temp_surface_level_kelvin"),
         (6, "2 metre temperature", "2_metre_temp_kelvin"),
@@ -223,7 +227,7 @@ def main():
         print_usage()
         exit(1)
 
-    lat_lon_to_gisjoin_mappings_file = "./gisjoin_mappings.csv" 
+    lat_lon_to_gisjoin_mappings_file = "./gisjoin_mappings.csv"
     input_path = sys.argv[1]
     output_path = sys.argv[2]
 
@@ -237,7 +241,6 @@ def main():
     filenames = sorted(os.listdir(input_path))
     grb_filenames = [filename for filename in filenames if filename.endswith(".grb")]
     for grb_file in grb_filenames:
-       
         # Filename looks like: "namanl_218_20101129_0600_006.grb"
         grb_file_fields = grb_file.split('_')
         yyyymmdd = grb_file_fields[2]
@@ -248,7 +251,7 @@ def main():
         dd = yyyymmdd[6:]
 
         input_file_path = f"{input_path}{grb_file}" if input_path.endswith("/") else f"{input_path}/{grb_file}"
-        output_path = output_path if not output_path.endswith("/") else output_path[:-1] # remove trailing slash
+        output_path = output_path if not output_path.endswith("/") else output_path[:-1]  # remove trailing slash
 
         convert_grb_to_csv(input_file_path, output_path, yyyy, mm, dd, hour, timestep,
                            start_time, lat_lon_to_gisjoin_mappings_file)
