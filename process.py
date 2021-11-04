@@ -243,7 +243,7 @@ def print_usage():
 def test():
     selected_fields = load_selected_fields()
     csv_header_row = "YYYYMMDDHH,TIMESTEP,GISJOIN,LATITUDE,LONGITUDE,"
-    csv_header_row += ",".join([field[1] for field in selected_fields.rows])
+    csv_header_row += ",".join([field[1] for field in selected_fields.iterrows()])
     print(csv_header_row)
 
 
