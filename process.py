@@ -52,6 +52,11 @@ selected_grb_2_fields = {
 }
 
 
+def load_selected_fields():
+    selected_fields_df = pd.read_csv("selected_fields.csv", header=0, delimiter=",")
+    return selected_fields_df
+
+
 # Finds the GISJoin that a lat/lon point falls into.
 # If the point doesn't fall into any GISJoin, None is returned.
 def lat_lon_to_gisjoin(mongo_client, lat, lon):
@@ -142,17 +147,18 @@ def convert_grb_to_csv(grb_file, out_path, year, month, day, hour, timestep, sta
     out_file = f"{out_path}/{year}_{month}_{day}_{hour}_{timestep}.csv"
 
     print(f"Processing/Writing {out_file}...")
+    selected_fields = load_selected_fields()
 
     with open(out_file, "w") as f:
         # Create csv header row with new column names
         csv_header_row = "YYYYMMDDHH,TIMESTEP,GISJOIN,LATITUDE,LONGITUDE,"
-        csv_header_row += ",".join([field[2] for field in selected_grb_2_fields])
+        csv_header_row += ",".join([field[2] for field in selected_fields])
         f.write(csv_header_row + "\n")
 
         # Build values list
         values_list = []
         before = time.time()
-        for selected_field in selected_grb_2_fields:
+        for selected_field in selected_fields:
             grb_index = selected_field[0]
             grb = grbs.message(grb_index)
             values_list.append(grb.values)
@@ -235,12 +241,10 @@ def print_usage():
 
 
 def test():
-    grb_2_filename = "/s/lattice-120/b/nobackup/galileo/datasets/noaa_nam/nam_218_20210101_0000_000.grb2"
-    grbs = pygrib.open(grb_2_filename)
-    for grb in grbs:
-        print(grb)
-
-    grbs.close()
+    selected_fields = load_selected_fields()
+    csv_header_row = "YYYYMMDDHH,TIMESTEP,GISJOIN,LATITUDE,LONGITUDE,"
+    csv_header_row += ",".join([field[2] for field in selected_fields])
+    print(csv_header_row)
 
 
 def main():
