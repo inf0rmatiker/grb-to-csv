@@ -172,7 +172,7 @@ def get_files(dir_name):
 
 def count_files(path):
     filenames = get_files(path)
-    grb_filenames = [filename for filename in filenames if filename.endswith(".grb")]
+    grb_filenames = [filename for filename in filenames if filename.endswith(".grb2")]
     return len(grb_filenames)
 
 
@@ -223,10 +223,10 @@ def main():
     print_time(start_time)
 
     filenames = sorted(os.listdir(input_path))
-    grb_filenames = [filename for filename in filenames if filename.endswith(".grb")]
+    grb_filenames = [filename for filename in filenames if filename.endswith(".grb2")]
     for grb_file in grb_filenames:
 
-        # Filename looks like: "namanl_218_20101129_0600_006.grb"
+        # Filename looks like: "namanl_218_20101129_0600_006.grb2"
         grb_file_fields = grb_file.split('_')
         yyyymmdd = grb_file_fields[2]
         hour = grb_file_fields[3]
