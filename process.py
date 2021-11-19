@@ -230,7 +230,7 @@ def main():
         grb_file_fields = grb_file.split('_')
         yyyymmdd = grb_file_fields[2]
         hour = grb_file_fields[3]
-        timestep = grb_file_fields[4][:-4]
+        timestep = grb_file_fields[4][:-5]
         yyyy = yyyymmdd[:4]
         mm = yyyymmdd[4:6]
         dd = yyyymmdd[6:]
