@@ -205,7 +205,7 @@ def print_usage():
           "~/local-disk/b/nobackup/galileo/datasets/noaa_nam/processed\n")
 
 def test():
-    grbs = pygrib.open("~/local-disk/b/nobackup/galileo/noaa-data/2004/namanl_218_20041106_0000_006.grb")
+    grbs = pygrib.open("/s/parsons/b/others/sustain/local-disk/b/nobackup/galileo/noaa-data/2004/namanl_218_20041106_0000_000.grb")
     for grb in grbs:
         print(grb)
     grbs.close()
