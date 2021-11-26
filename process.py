@@ -204,8 +204,17 @@ def print_usage():
     print("\tExample:\t./bin/python3 process.py ~/local-disk/b/nobackup/galileo/datasets/noaa_nam/original "
           "~/local-disk/b/nobackup/galileo/datasets/noaa_nam/processed\n")
 
+def test():
+    grbs = pygrib.open("~/local-disk/b/nobackup/galileo/noaa-data/2004/namanl_218_20041106_0000_006.grb")
+    for grb in grbs:
+        print(grb)
+    grbs.close()
+
 
 def main():
+
+    test()
+    exit(0)
 
     if len(sys.argv) != 3:
         print_usage()
@@ -223,14 +232,16 @@ def main():
     print_time(start_time)
 
     filenames = sorted(os.listdir(input_path))
-    grb_filenames = [filename for filename in filenames if filename.endswith(".grb2")]
+    grb_filenames = [filename for filename in filenames if filename.endswith(".grb2") or filename.endswith(".grb")]
     for grb_file in grb_filenames:
+
+        file_extension = ".grb" if grb_file.endswith(".grb") else ".grb2"
 
         # Filename looks like: "namanl_218_20101129_0600_006.grb2"
         grb_file_fields = grb_file.split('_')
         yyyymmdd = grb_file_fields[2]
         hour = grb_file_fields[3]
-        timestep = grb_file_fields[4][:-5]
+        timestep = grb_file_fields[4][:-(len(file_extension))]
         yyyy = yyyymmdd[:4]
         mm = yyyymmdd[4:6]
         dd = yyyymmdd[6:]
