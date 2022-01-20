@@ -204,8 +204,9 @@ def print_usage():
     print("\tExample:\t./bin/python3 process.py ~/local-disk/b/nobackup/galileo/datasets/noaa_nam/original "
           "~/local-disk/b/nobackup/galileo/datasets/noaa_nam/processed\n")
 
+
 def test():
-    grbs = pygrib.open("/s/parsons/b/others/sustain/local-disk/b/nobackup/galileo/noaa-data/2004/namanl_218_20041106_0000_000.grb")
+    grbs = pygrib.open("sample_files/grb2/namanl_218_20210704_1800_003.grb2")
     for grb in grbs:
         print(grb)
     grbs.close()
@@ -213,8 +214,9 @@ def test():
 
 def main():
 
-    test()
-    exit(0)
+    if len(sys.argv) == 2 and sys.argv[1] == "--test":
+        test()
+        exit(0)
 
     if len(sys.argv) != 3:
         print_usage()
